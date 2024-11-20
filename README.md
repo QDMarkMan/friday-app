@@ -1,6 +1,6 @@
 # Friday application
 
-> A simple AI based application that helps you everything.
+> A simple demo based `Tauri` + `Nextjs`.
 
 ## Getting Started
 
