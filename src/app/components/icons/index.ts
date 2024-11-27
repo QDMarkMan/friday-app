@@ -11,3 +11,4 @@ export * from './src/ship';
 export * from './src/user';
 export * from './src/workflow';
 export * from './src/search';
+export * from './src/sparkles';

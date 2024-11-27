@@ -22,7 +22,6 @@ import { WorkflowIcon, UserIcon, CalendarCogIcon, SettingsGearIcon } from "./ico
 const OperatePanel: React.FC = () => {
   return (
     <Command>
-      <CommandInput placeholder="Type a command or search..." />
       <CommandList>
         <CommandEmpty>No results found.</CommandEmpty>
         <CommandGroup heading="Suggestions">

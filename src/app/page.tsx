@@ -1,7 +1,7 @@
 // import Image from "next/image";
 // import Logo from '@/app/assets/Logo.png'
 
-import OperatePanel from '@/app/components/operate-panel';
+import InStage from './components/in-stage';
 
 export default function Home() {
   return (
@@ -13,7 +13,7 @@ export default function Home() {
 
       <div className="pt-2 flex justify-center">
         <div className="w-full rounded-lg">
-          <OperatePanel />
+          <InStage/>
         </div>
       </div>
     </main>
