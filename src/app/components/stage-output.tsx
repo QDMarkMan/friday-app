@@ -6,6 +6,7 @@
 
 import { cn } from "@/lib/utils";
 import React from "react";
+import '@/app/styles/glow.scss';
 
 export type StageOutputProps = {
   className?: string;
@@ -13,8 +14,8 @@ export type StageOutputProps = {
 
 export const StageOutput: React.FC<StageOutputProps> = ({ className }) => {
   return (
-    <div className={cn('w-full rounded-sm border border-indigo-50', className)}>
-      <div className="text-4xl font-bold text-center text-accent">
+    <div className={cn('w-full rounded-sm', className)}>
+      <div className="glow min-h-36 text-4xl font-bold text-center">
         <span>Output</span>
       </div>
     </div>
