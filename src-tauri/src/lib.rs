@@ -5,7 +5,10 @@
  *-------------------------------------------------------------------------------------------- */
 
 use tauri::{
-    image::Image, menu::{ Menu, MenuItem }, tray::TrayIconBuilder
+    menu::{ Menu, MenuItem },
+    tray::TrayIconBuilder,
+    Error,
+    Manager
 };
 use tauri_plugin_global_shortcut::GlobalShortcutExt;
 use tauri_plugin_global_shortcut::{ Shortcut, Code, Modifiers };
@@ -23,9 +26,34 @@ fn setup_tray(app: &tauri::App) -> Result<(), tauri::Error> {
     let _tray = TrayIconBuilder::new()
         .icon(app.default_window_icon().unwrap().clone())
         .menu(&menu)
-        .build(app)?;
+        .build(app)?
+        .on_menu_event(|app, event| match event.id.as_ref() {
+            "quit" => {
+                app.exit(0);
+            }
+            _ => {
+                println!("menu item {:?} not handled", event.id);
+            }
+        });
     Ok(())
 }
+
+// fn toggle_window_display(app: &tauri::App, show: bool) -> Result<(), tauri::Error> {
+//     dbg!(&app);
+//     // 获取主窗口的句柄
+//     if let Some(window) =  app.get_webview_window("main") {
+//         // 根据 `show` 参数决定是显示还是隐藏窗口
+//         if show {
+//             window.show()?;
+//         } else {
+//             window.hide()?;
+//         }
+//     } else {
+//         // 如果未找到窗口，返回错误
+//         return Err(Error::WindowNotFound);
+//     }
+//     Ok(())
+// }
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
@@ -41,6 +69,8 @@ pub fn run() {
                         if shortcut == &ctrl_command_f {
                             println!("Ctrl + Shift + F Detected!");
                         }
+                        // let window = app.get_webview_window("main");
+                        // window.show()?;
                     }).build()
                 )?;
                 app.handle().global_shortcut().register(ctrl_command_f)?;
