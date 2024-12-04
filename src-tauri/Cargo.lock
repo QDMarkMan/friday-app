@@ -1008,6 +1008,7 @@ name = "friday-app"
 version = "0.1.0"
 dependencies = [
  "chrono",
+ "global-hotkey",
  "serde",
  "serde_json",
  "tauri",

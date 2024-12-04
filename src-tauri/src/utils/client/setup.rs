@@ -6,6 +6,7 @@
 
 use super::{
     config::{init_globals, init_window},
+    shortcut::register_global_shortcuts,
     tray::create_system_tray,
 };
 
@@ -13,6 +14,8 @@ pub fn setup(app: &mut tauri::App) -> Result<(), Box<dyn std::error::Error + 'st
     init_globals(app);
 
     init_window(app);
+
+    register_global_shortcuts(app)?;
 
     let _ = create_system_tray(app)?;
 
