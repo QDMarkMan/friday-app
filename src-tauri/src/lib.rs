@@ -7,7 +7,7 @@ mod commands;
 mod service;
 mod utils;
 
-use commands::window;
+use commands::{clipboard, window};
 use utils::client::setup;
 
 #[macro_export]
@@ -29,7 +29,10 @@ pub fn run() {
         .plugin(tauri_plugin_log::Builder::new().build())
         .plugin(tauri_plugin_clipboard_manager::init())
         .plugin(tauri_plugin_shell::init())
-        .invoke_handler(tauri::generate_handler![window::window_display_toggle])
+        .invoke_handler(tauri::generate_handler![
+            window::window_display_toggle,
+            clipboard::get_clipboard
+        ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }
