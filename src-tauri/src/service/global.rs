@@ -6,7 +6,7 @@
 
 use tauri::WebviewWindow;
 
-use crate::utils::client::config::MAIN_WINDOW;
+use crate::client::config::MAIN_WINDOW;
 use std::sync::MutexGuard;
 
 pub fn get_main_window() -> MutexGuard<'static, WebviewWindow> {

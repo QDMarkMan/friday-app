@@ -26,6 +26,7 @@ pub fn init_window(app: &mut tauri::App) {
     {
         let _ = window.set_decorations(true);
         let _ = window.set_shadow(true);
+        let _ = window.set_visible_on_all_workspaces(false);
     }
 
     #[cfg(debug_assertions)]

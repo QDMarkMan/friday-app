@@ -3,12 +3,12 @@
  *  @Email [etongfu@outlook.com].
  *  @Date [2024-11-28 11:38:42].
  *-------------------------------------------------------------------------------------------- */
+mod client;
 mod commands;
 mod service;
-mod utils;
 
+use client::setup;
 use commands::{clipboard, window};
-use utils::client::setup;
 
 #[macro_export]
 macro_rules! print_log {
