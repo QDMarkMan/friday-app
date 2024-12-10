@@ -17,7 +17,7 @@ macro_rules! print_log {
             use chrono::{Local, DateTime};
             let now: DateTime<Local> = Local::now();
             let millis = now.timestamp_subsec_millis();
-            println!("{}.{:03}: {}", now.format("%Y-%m-%d %H:%M:%S"), millis, format!($($arg)*));
+            println!("Log: {}.{:03}: {}", now.format("%Y-%m-%d %H:%M:%S"), millis, format!($($arg)*));
         }
     };
 }
@@ -35,4 +35,10 @@ pub fn run() {
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
+    // .run(|_app_handle, event| {
+    //     // 窗口
+    //     if let tauri::RunEvent::ExitRequested { api, .. } = event {
+    //         api.prevent_exit();
+    //     }
+    // });
 }
