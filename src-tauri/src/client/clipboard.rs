@@ -5,9 +5,11 @@
  ****************************************************************************/
 use std::sync::Mutex;
 
+use crate::client::config::APP;
+
 pub struct ClipboardMonitorEnableWrapper(pub Mutex<String>);
 
-pub fn start_clipboard_monitor(app: tauri::AppHandle) {
+pub fn start_clipboard_monitor(handle: tauri::AppHandle) {
     tauri::async_runtime::spawn(async move {
         let mut _pre_text = "".to_string();
     });
@@ -25,6 +27,6 @@ pub fn setup_clipboard(app: &mut tauri::App) {
     // app.manage(ClipboardMonitorEnableWrapper(Mutex::new(
     //     clipboard_monitor.to_string(),
     // )));
-    let _handle = app.handle();
+    let _handle = APP.get().unwrap();
     dbg!(_handle);
 }

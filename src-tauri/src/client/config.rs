@@ -13,6 +13,8 @@ pub static MAIN_WINDOW_Y: i32 = 400;
 pub static APP: OnceLock<tauri::AppHandle> = OnceLock::new();
 pub static MAIN_WINDOW: OnceLock<Arc<Mutex<WebviewWindow>>> = OnceLock::new();
 
+pub struct StringWrapper(pub Mutex<String>);
+
 pub fn init_globals(app: &mut tauri::App) {
     APP.set(app.handle().clone())
         .unwrap_or_else(|_| panic!("Failed to initialize APP"));

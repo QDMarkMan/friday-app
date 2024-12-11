@@ -6,6 +6,9 @@
 
 use log::info;
 use macos_accessibility_client;
+use tauri::Manager;
+
+use crate::client::config::StringWrapper;
 
 use super::{
     // clipboard::setup_clipboard,
@@ -32,6 +35,9 @@ pub fn setup(app: &mut tauri::App) -> Result<(), Box<dyn std::error::Error + 'st
     let _ = create_system_tray(app)?;
 
     register_global_shortcuts(app)?;
+
+    // Text
+    app.manage(StringWrapper(std::sync::Mutex::new("".to_string())));
 
     // setup_clipboard(app);
 
