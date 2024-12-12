@@ -10,7 +10,7 @@ import React, { useState } from "react";
 import StageInput from "@/app/components/stage-input";
 // import OperatePanel from "./operate-panel";
 import { StageOutput } from "./stage-output";
-import { getCurrentText } from "@/lib/commands";
+import { getClipboardContent, getCurrentText } from "@/lib/commands";
 
 const InStage: React.FC = () => {
 
@@ -20,7 +20,8 @@ const InStage: React.FC = () => {
     setContent(e.currentTarget.value)
     if (e.key === "Enter") {
       const response = await getCurrentText()
-      console.log("🚀 ~ handleKeyUp ~ response:", response)
+      const clipboard = await getClipboardContent()
+      console.log("🚀 ~ handleKeyUp ~ response:", response, clipboard)
     }
   }
 

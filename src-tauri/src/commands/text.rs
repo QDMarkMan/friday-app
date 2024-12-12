@@ -6,13 +6,19 @@
 
 use log::info;
 
-use crate::client::config::StringWrapper;
-
 #[tauri::command]
-pub fn get_selection_text(state: tauri::State<StringWrapper>) -> String {
-    use selection::get_text;
-    let value = get_text();
-    info!("get_text: {}", value);
-    // return state.0.lock().unwrap().to_string();
-    return value;
+pub fn get_selection_text() -> String {
+    // _state: tauri::State<StringWrapper>
+    // FIXME: This is a workaround to get the selected text
+    use get_selected_text::get_selected_text;
+    let text = get_selected_text().unwrap();
+    info!("Get selection text: {}", text);
+    if !text.trim().is_empty() {
+        // let app_handle = APP.get().unwrap();
+        // // Write into State
+        // let state: tauri::State<StringWrapper> = app_handle.state();
+        // state.0.lock().unwrap().replace_range(.., &text);
+        info!("Get selection text: {}", text);
+    }
+    text
 }
