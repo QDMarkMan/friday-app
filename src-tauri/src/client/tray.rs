@@ -3,7 +3,7 @@
  *  @Email [etongfu@outlook.com].
  *  @Date [2024-12-02 15:23:40].
  ****************************************************************************/
-use crate::service::window::toggle_window_display;
+use crate::service::window::display_window;
 use tauri::{
     menu::{Menu, MenuItem},
     tray::TrayIconBuilder,
@@ -19,7 +19,7 @@ pub fn create_system_tray(app: &mut tauri::App) -> Result<(), Box<dyn std::error
         .icon(app.default_window_icon().unwrap().clone())
         .menu(&menu)
         .on_menu_event(|app, event| match event.id.0.as_str() {
-            "open" => toggle_window_display(),
+            "open" => display_window(Some(true)),
             "quit" => app.exit(0),
             id => println!("Unhandled menu item: {:?}", id),
         })

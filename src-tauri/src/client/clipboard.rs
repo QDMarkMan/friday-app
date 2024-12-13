@@ -5,7 +5,7 @@
  ****************************************************************************/
 use std::sync::Mutex;
 
-use crate::client::config::APP;
+use crate::client::config::APP_HANDLE;
 
 pub struct ClipboardMonitorEnableWrapper(pub Mutex<String>);
 
@@ -27,6 +27,6 @@ pub fn setup_clipboard(app: &mut tauri::App) {
     // app.manage(ClipboardMonitorEnableWrapper(Mutex::new(
     //     clipboard_monitor.to_string(),
     // )));
-    let _handle = APP.get().unwrap();
+    let _handle = APP_HANDLE.get().unwrap();
     dbg!(_handle);
 }
