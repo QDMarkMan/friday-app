@@ -5,8 +5,7 @@
  ****************************************************************************/
 use super::global::get_main_window;
 use log::info;
-use mouse_position::mouse_position::{Mouse, Position};
-use tauri::{Monitor, PhysicalPosition};
+use tauri::PhysicalPosition;
 
 pub fn toggle_window_display() {
     if get_main_window().is_visible().unwrap() {

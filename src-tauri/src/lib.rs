@@ -26,9 +26,9 @@ macro_rules! print_log {
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     tauri::Builder::default()
-        .plugin(tauri_plugin_single_instance::init(|_app, _, cwd| {
-            warn!("Single instance started with cwd: {}", cwd);
-        }))
+        // .plugin(tauri_plugin_single_instance::init(|_app, _, cwd| {
+        //     warn!("Single instance started with cwd: {}", cwd);
+        // }))
         .setup(setup::setup)
         .plugin(tauri_plugin_log::Builder::new().build())
         .plugin(tauri_plugin_clipboard_manager::init())
