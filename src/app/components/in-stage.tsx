@@ -5,12 +5,12 @@
  *  @Des [The Stage Panel when awaked].
  *-------------------------------------------------------------------------------------------- */
 'use client';
-
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import StageInput from "@/app/components/stage-input";
 // import OperatePanel from "./operate-panel";
 import { StageOutput } from "./stage-output";
 import { getClipboardContent, getCurrentText } from "@/lib/commands";
+import { Event, listen } from '@tauri-apps/api/event';
 
 const InStage: React.FC = () => {
 
@@ -25,8 +25,15 @@ const InStage: React.FC = () => {
     }
   }
 
+  useEffect(() => {
+    listen('current-select', (event: Event<string>) => {
+      setContent(event.payload)
+    })
+  })
+
+
   return <>
-    <StageInput onKeyUp={handleKeyUp} />
+    <StageInput onKeyUp={handleKeyUp} defaultValue={content} />
     <StageOutput className="mt-1" />
     {/* <OperatePanel /> */}
   </>

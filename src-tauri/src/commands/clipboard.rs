@@ -5,11 +5,8 @@
  ****************************************************************************/
 use arboard::Clipboard;
 
-use crate::print_log;
-
 #[tauri::command]
 pub fn get_clipboard() -> String {
-    print_log!("Start get clipboard");
     let mut clipboard = Clipboard::new().unwrap();
     let data = clipboard.get_text().unwrap();
     data

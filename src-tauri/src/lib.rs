@@ -11,18 +11,6 @@ use client::setup;
 use commands::{clipboard, text, window};
 use log::warn;
 
-#[macro_export]
-macro_rules! print_log {
-    ($($arg:tt)*) => {
-        {
-            use chrono::{Local, DateTime};
-            let now: DateTime<Local> = Local::now();
-            let millis = now.timestamp_subsec_millis();
-            println!("Log: {}.{:03}: {}", now.format("%Y-%m-%d %H:%M:%S"), millis, format!($($arg)*));
-        }
-    };
-}
-
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     tauri::Builder::default()

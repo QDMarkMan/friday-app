@@ -3,13 +3,17 @@
  *  @Email [etongfu@outlook.com].
  *  @Date [2024-12-04 10:30:26].
  ****************************************************************************/
-use crate::{commands::text::get_selection_text, service::window::display_window};
+use crate::{
+    client::events::emit_current_selected, commands::text::get_selection_text,
+    service::window::display_window,
+};
 use log::info;
 use tauri_plugin_global_shortcut::{Code, GlobalShortcutExt, Modifiers, Shortcut, ShortcutState};
 
 fn handle_active_shortcut() {
     let current_text = get_selection_text();
     println!("Current Text: {:?}", current_text);
+    emit_current_selected(&current_text);
     display_window(Some(true));
 }
 
