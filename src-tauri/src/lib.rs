@@ -9,7 +9,6 @@ mod service;
 
 use client::setup;
 use commands::{clipboard, text, window};
-use log::warn;
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
@@ -18,6 +17,7 @@ pub fn run() {
         //     warn!("Single instance started with cwd: {}", cwd);
         // }))
         .setup(setup::setup)
+        .plugin(tauri_plugin_os::init())
         .plugin(tauri_plugin_log::Builder::new().build())
         .plugin(tauri_plugin_clipboard_manager::init())
         .plugin(tauri_plugin_shell::init())

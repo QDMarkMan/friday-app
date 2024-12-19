@@ -33,7 +33,7 @@ const InStage: React.FC = () => {
 
 
   return <>
-    <StageInput onKeyUp={handleKeyUp} defaultValue={content} />
+    <StageInput className="bg-background" value={content} />
     <StageOutput className="mt-1" />
     {/* <OperatePanel /> */}
   </>
