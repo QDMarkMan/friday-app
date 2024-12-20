@@ -1,23 +1,23 @@
-import type { Metadata } from "next";
-import clsx from "clsx";
-import { Inter } from "next/font/google";
-import "./globals.css";
+import type { Metadata } from 'next'
+import clsx from 'clsx'
+import { Inter } from 'next/font/google'
+import './globals.css'
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: "Friday",
-  description: "The friday app",
-};
+  title: 'Friday',
+  description: 'The friday app'
+}
 
 export default function RootLayout({
-  children,
+  children
 }: Readonly<{
-  children: React.ReactNode;
+  children: React.ReactNode
 }>) {
   return (
     <html lang="en">
       <body className={clsx(inter.className)}>{children}</body>
     </html>
-  );
+  )
 }

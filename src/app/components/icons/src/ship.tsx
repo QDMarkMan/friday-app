@@ -1,22 +1,22 @@
-'use client';
+'use client'
 
-import type { Variants }from 'motion/react';
-import { motion, useAnimation }from 'motion/react';
+import type { Variants } from 'motion/react'
+import { motion, useAnimation } from 'motion/react'
 
 const pathVariants: Variants = {
   normal: {
     pathLength: 1,
-    opacity: 1,
+    opacity: 1
   },
   animate: {
     pathLength: [0, 1],
     opacity: [0, 1],
     transition: {
       delay: 0.15,
-      opacity: { delay: 0.1 },
-    },
-  },
-};
+      opacity: { delay: 0.1 }
+    }
+  }
+}
 
 const gVariants: Variants = {
   normal: { rotate: 0 },
@@ -26,13 +26,13 @@ const gVariants: Variants = {
       repeat: Infinity,
       repeatType: 'mirror' as const,
       duration: 1.2,
-      ease: 'easeInOut',
-    },
-  },
-};
+      ease: 'easeInOut'
+    }
+  }
+}
 
 const ShipIcon = () => {
-  const controls = useAnimation();
+  const controls = useAnimation()
 
   return (
     <div
@@ -65,7 +65,7 @@ const ShipIcon = () => {
         </motion.g>
       </svg>
     </div>
-  );
-};
+  )
+}
 
-export { ShipIcon };
+export { ShipIcon }

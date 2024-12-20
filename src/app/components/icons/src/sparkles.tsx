@@ -1,28 +1,28 @@
-'use client';
+'use client'
 
-import type { Variants } from 'motion/react';
-import { motion, useAnimation } from 'motion/react';
+import type { Variants } from 'motion/react'
+import { motion, useAnimation } from 'motion/react'
 
 const sparkleVariants: Variants = {
   initial: {
     y: 0,
-    fill: 'none',
+    fill: 'none'
   },
   hover: {
     y: [0, -1, 0, 0],
     fill: 'currentColor',
     transition: {
       duration: 1,
-      bounce: 0.3,
-    },
-  },
-};
+      bounce: 0.3
+    }
+  }
+}
 
 const starVariants: Variants = {
   initial: {
     opacity: 1,
     x: 0,
-    y: 0,
+    y: 0
   },
   blink: () => ({
     opacity: [0, 1, 0, 0, 0, 0, 1],
@@ -31,25 +31,25 @@ const starVariants: Variants = {
       type: 'spring',
       stiffness: 70,
       damping: 10,
-      mass: 0.4,
-    },
-  }),
-};
+      mass: 0.4
+    }
+  })
+}
 
 const SparklesIcon = () => {
-  const starControls = useAnimation();
-  const sparkleControls = useAnimation();
+  const starControls = useAnimation()
+  const sparkleControls = useAnimation()
 
   return (
     <div
       className="cursor-pointer select-none p-2 hover:bg-accent rounded-md transition-colors duration-200 flex items-center justify-center"
       onMouseEnter={() => {
-        sparkleControls.start('hover');
-        starControls.start('blink', { delay: 1 });
+        sparkleControls.start('hover')
+        starControls.start('blink', { delay: 1 })
       }}
       onMouseLeave={() => {
-        sparkleControls.start('initial');
-        starControls.start('initial');
+        sparkleControls.start('initial')
+        starControls.start('initial')
       }}
     >
       <svg
@@ -68,29 +68,13 @@ const SparklesIcon = () => {
           variants={sparkleVariants}
           animate={sparkleControls}
         />
-        <motion.path
-          d="M20 3v4"
-          variants={starVariants}
-          animate={starControls}
-        />
-        <motion.path
-          d="M22 5h-4"
-          variants={starVariants}
-          animate={starControls}
-        />
-        <motion.path
-          d="M4 17v2"
-          variants={starVariants}
-          animate={starControls}
-        />
-        <motion.path
-          d="M5 18H3"
-          variants={starVariants}
-          animate={starControls}
-        />
+        <motion.path d="M20 3v4" variants={starVariants} animate={starControls} />
+        <motion.path d="M22 5h-4" variants={starVariants} animate={starControls} />
+        <motion.path d="M4 17v2" variants={starVariants} animate={starControls} />
+        <motion.path d="M5 18H3" variants={starVariants} animate={starControls} />
       </svg>
     </div>
-  );
-};
+  )
+}
 
-export { SparklesIcon };
+export { SparklesIcon }

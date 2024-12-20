@@ -3,7 +3,7 @@
  *  @Email [etongfu@outlook.com].
  *  @Date [2024-11-15 11:37:00].
  *-------------------------------------------------------------------------------------------- */
-import React from "react";
+import React from 'react'
 
 import {
   Command,
@@ -14,10 +14,10 @@ import {
   CommandItem,
   CommandList,
   CommandSeparator,
-  CommandShortcut,
-} from "@/components/ui/command"
+  CommandShortcut
+} from '@/components/ui/command'
 
-import { WorkflowIcon, UserIcon, CalendarCogIcon, SettingsGearIcon } from "./icons";
+import { WorkflowIcon, UserIcon, CalendarCogIcon, SettingsGearIcon } from './icons'
 
 const OperatePanel: React.FC = () => {
   return (
@@ -31,7 +31,7 @@ const OperatePanel: React.FC = () => {
           </CommandItem>
           <CommandItem>
             <WorkflowIcon />
-            <span>Workflow</span>   
+            <span>Workflow</span>
           </CommandItem>
         </CommandGroup>
         <CommandSeparator />
@@ -47,8 +47,7 @@ const OperatePanel: React.FC = () => {
         </CommandGroup>
       </CommandList>
     </Command>
-  );
+  )
 }
 
-export default OperatePanel;
-
+export default OperatePanel

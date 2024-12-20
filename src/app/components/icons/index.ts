@@ -5,10 +5,10 @@
  *  @Description [All animate icons from https://icons.pqoqubbw.dev/.].
  ****************************************************************************/
 
-export * from './src/calendar';
-export * from './src/settings-gear';
-export * from './src/ship';
-export * from './src/user';
-export * from './src/workflow';
-export * from './src/search';
-export * from './src/sparkles';
+export * from './src/calendar'
+export * from './src/settings-gear'
+export * from './src/ship'
+export * from './src/user'
+export * from './src/workflow'
+export * from './src/search'
+export * from './src/sparkles'

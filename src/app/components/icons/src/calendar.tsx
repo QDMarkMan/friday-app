@@ -1,15 +1,15 @@
-'use client';
+'use client'
 
-import type { Variants }from 'motion/react';
-import { motion, useAnimation }from 'motion/react';
+import type { Variants } from 'motion/react'
+import { motion, useAnimation } from 'motion/react'
 
 const gVariants: Variants = {
   normal: { rotate: 0 },
-  animate: { rotate: 180 },
-};
+  animate: { rotate: 180 }
+}
 
 const CalendarCogIcon = () => {
-  const controls = useAnimation();
+  const controls = useAnimation()
 
   return (
     <div
@@ -32,11 +32,7 @@ const CalendarCogIcon = () => {
         <path d="M16 2v4" />
         <path d="M3 10h18" />
         <path d="M8 2v4" />
-        <motion.g
-          transition={{ type: 'spring', stiffness: 50, damping: 10 }}
-          variants={gVariants}
-          animate={controls}
-        >
+        <motion.g transition={{ type: 'spring', stiffness: 50, damping: 10 }} variants={gVariants} animate={controls}>
           <path d="m15.2 16.9-.9-.4" />
           <path d="m15.2 19.1-.9.4" />
           <path d="m16.9 15.2-.4-.9" />
@@ -49,7 +45,7 @@ const CalendarCogIcon = () => {
         </motion.g>
       </svg>
     </div>
-  );
-};
+  )
+}
 
-export { CalendarCogIcon };
+export { CalendarCogIcon }

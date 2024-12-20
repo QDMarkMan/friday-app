@@ -1,9 +1,9 @@
-'use client';
+'use client'
 
-import { motion, useAnimation }from 'motion/react';
+import { motion, useAnimation } from 'motion/react'
 
 const SearchIcon = () => {
-  const controls = useAnimation();
+  const controls = useAnimation()
 
   return (
     <div
@@ -25,12 +25,12 @@ const SearchIcon = () => {
           normal: { x: 0, y: 0 },
           animate: {
             x: [0, 0, -3, 0],
-            y: [0, -4, 0, 0],
-          },
+            y: [0, -4, 0, 0]
+          }
         }}
         transition={{
           duration: 1,
-          bounce: 0.3,
+          bounce: 0.3
         }}
         animate={controls}
       >
@@ -38,7 +38,7 @@ const SearchIcon = () => {
         <path d="m21 21-4.3-4.3" />
       </motion.svg>
     </div>
-  );
-};
+  )
+}
 
-export { SearchIcon };
+export { SearchIcon }

@@ -1,9 +1,9 @@
-'use client';
+'use client'
 
-import { motion, useAnimation }from 'motion/react';
+import { motion, useAnimation } from 'motion/react'
 
 const SettingsGearIcon = () => {
-  const controls = useAnimation();
+  const controls = useAnimation()
 
   return (
     <div
@@ -24,11 +24,11 @@ const SettingsGearIcon = () => {
         transition={{ type: 'spring', stiffness: 50, damping: 10 }}
         variants={{
           normal: {
-            rotate: 0,
+            rotate: 0
           },
           animate: {
-            rotate: 180,
-          },
+            rotate: 180
+          }
         }}
         animate={controls}
       >
@@ -36,7 +36,7 @@ const SettingsGearIcon = () => {
         <circle cx="12" cy="12" r="3" />
       </motion.svg>
     </div>
-  );
-};
+  )
+}
 
-export { SettingsGearIcon };
+export { SettingsGearIcon }

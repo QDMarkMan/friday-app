@@ -1,0 +1,48 @@
+{
+  "$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
+  "vcs": { "enabled": true, "clientKind": "git", "useIgnoreFile": false },
+  "files": { "ignoreUnknown": false, "ignore": [] },
+  "formatter": {
+    "enabled": true,
+    "useEditorconfig": true,
+    "formatWithErrors": false,
+    "indentStyle": "space",
+    "indentWidth": 2,
+    "lineEnding": "lf",
+    "lineWidth": 160,
+    "attributePosition": "auto",
+    "bracketSpacing": true,
+    "ignore": [
+      "**/node_modules",
+      "**/ .next",
+      "**/ .husky",
+      "**/ coverage",
+      "**/ .prettierignore",
+      "**/ .stylelintignore",
+      "**/ .eslintignore",
+      "**/ stories",
+      "**/ storybook-static",
+      "**/ *.log",
+      "**/ playwright-report",
+      "**/ .nyc_output",
+      "**/ test-results",
+      "**/ junit.xml",
+      "**/ docs"
+    ]
+  },
+  "organizeImports": { "enabled": true },
+  "linter": { "enabled": true, "rules": { "recommended": true } },
+  "javascript": {
+    "formatter": {
+      "jsxQuoteStyle": "double",
+      "quoteProperties": "asNeeded",
+      "trailingCommas": "none",
+      "semicolons": "asNeeded",
+      "arrowParentheses": "asNeeded",
+      "bracketSameLine": false,
+      "quoteStyle": "single",
+      "attributePosition": "auto",
+      "bracketSpacing": true
+    }
+  }
+}

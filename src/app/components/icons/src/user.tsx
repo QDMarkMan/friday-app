@@ -1,32 +1,32 @@
-'use client';
+'use client'
 
-import type { Variants }from 'motion/react';
-import { motion, useAnimation }from 'motion/react';
+import type { Variants } from 'motion/react'
+import { motion, useAnimation } from 'motion/react'
 
 const pathVariant: Variants = {
   normal: { pathLength: 1, opacity: 1, pathOffset: 0 },
   animate: {
     pathLength: [0, 1],
     opacity: [0, 1],
-    pathOffset: [1, 0],
-  },
-};
+    pathOffset: [1, 0]
+  }
+}
 
 const circleVariant: Variants = {
   normal: {
     pathLength: 1,
     pathOffset: 0,
-    scale: 1,
+    scale: 1
   },
   animate: {
     pathLength: [0, 1],
     pathOffset: [1, 0],
-    scale: [0.5, 1],
-  },
-};
+    scale: [0.5, 1]
+  }
+}
 
 const UserIcon = () => {
-  const controls = useAnimation();
+  const controls = useAnimation()
 
   return (
     <div
@@ -45,26 +45,20 @@ const UserIcon = () => {
         strokeLinecap="round"
         strokeLinejoin="round"
       >
-        <motion.circle
-          cx="12"
-          cy="8"
-          r="5"
-          animate={controls}
-          variants={circleVariant}
-        />
+        <motion.circle cx="12" cy="8" r="5" animate={controls} variants={circleVariant} />
 
         <motion.path
           d="M20 21a8 8 0 0 0-16 0"
           variants={pathVariant}
           transition={{
             delay: 0.2,
-            duration: 0.4,
+            duration: 0.4
           }}
           animate={controls}
         />
       </svg>
     </div>
-  );
-};
+  )
+}
 
-export { UserIcon };
+export { UserIcon }

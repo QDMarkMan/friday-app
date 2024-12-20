@@ -4,12 +4,12 @@
  *  @Date [2024-11-27 10:12:38].
  *-------------------------------------------------------------------------------------------- */
 
-import { cn } from "@/lib/utils";
-import React from "react";
-import '@/app/styles/glow.scss';
+import { cn } from '@/lib/utils'
+import type React from 'react'
+import '@/app/styles/glow.scss'
 
 export type StageOutputProps = {
-  className?: string;
+  className?: string
 }
 
 export const StageOutput: React.FC<StageOutputProps> = ({ className }) => {
@@ -19,5 +19,5 @@ export const StageOutput: React.FC<StageOutputProps> = ({ className }) => {
         <span>Output</span>
       </div>
     </div>
-  );
+  )
 }

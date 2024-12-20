@@ -4,7 +4,7 @@
  *  @Date [2024-12-11 11:46:23].
  ****************************************************************************/
 
-import { invoke } from '@tauri-apps/api/core';
+import { invoke } from '@tauri-apps/api/core'
 
 export const getClipboardContent = async (): Promise<string> => {
   const response = await invoke('get_clipboard')
