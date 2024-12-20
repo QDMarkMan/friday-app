@@ -26,7 +26,7 @@ const BlockEditor: React.FC<BlockEditorProps> = ({ value = '', placeholder, edit
   const divRef = React.useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    onModeChange && onModeChange(localEditMode)
+    onModeChange?.(localEditMode)
   }, [localEditMode, onModeChange])
 
   useEffect(() => {

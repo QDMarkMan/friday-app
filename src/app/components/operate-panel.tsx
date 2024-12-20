@@ -3,7 +3,7 @@
  *  @Email [etongfu@outlook.com].
  *  @Date [2024-11-15 11:37:00].
  *-------------------------------------------------------------------------------------------- */
-import React from 'react'
+import type React from 'react'
 
 import {
   Command,

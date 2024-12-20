@@ -4,9 +4,9 @@
  *  @Date [2024-11-26 17:46:39].
  *-------------------------------------------------------------------------------------------- */
 
-import React from 'react'
+import type React from 'react'
 import { SparklesIcon } from './icons'
-import BlockEditor, { BlockEditorProps } from './block-editor'
+import BlockEditor, { type BlockEditorProps } from './block-editor'
 
 const StageInput: React.FC<BlockEditorProps> = ({ className, ...props }) => {
   return (
