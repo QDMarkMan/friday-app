@@ -11,27 +11,35 @@ import ContentEditable from "react-contenteditable";
 
 export type BlockEditorProps = {
   value?: string;
+  placeholder?: string;
   onChange?: (value: string) => void;
   onModeChange?: (mode: boolean) => void;
   className?: string;
   editable?: boolean;
+  autoToggle?: boolean;
   children?: React.ReactNode;
 };
 
 const BlockEditor: React.FC<BlockEditorProps> = ({
   value = "",
+  placeholder,
   editable = true,
+  autoToggle = false,
   onChange,
   onModeChange,
   className,
 }) => {
   const [localValue, setLocalValue] = useState(value);
-  const [localEditMode, setLocalEditable] = useState(false);
+  const [localEditMode, setLocalEditable] = useState(editable);
   const divRef = React.useRef<HTMLDivElement>(null);
   
   useEffect(() => {
     onModeChange && onModeChange(localEditMode);
   }, [ localEditMode, onModeChange ]);
+  
+  useEffect(() => {
+    setLocalValue(value);
+  }, [value]);
 
   const handleContentInput = (e: React.FormEvent<HTMLInputElement>) => {
     const newValue = e.currentTarget.innerHTML || "";
@@ -42,26 +50,28 @@ const BlockEditor: React.FC<BlockEditorProps> = ({
   const main = (
       <ContentEditable
         className={cn(
-          "block-render",
+          "block-render relative outline-none caret-blue-500",
           {
             "cursor-pointer": editable,
-            "cursor-text outline-none": localEditMode,
+            "cursor-text": localEditMode,
+            "before:content-[attr(data-placeholder)] before:absolute before:text-muted-foreground before:pointer-events-none": 
+            !localValue && placeholder,
           },
           className,
         )}
+        data-placeholder={placeholder}
         innerRef={divRef}
         html={localValue}
-        disabled={!localEditMode}
         onChange={handleContentInput}
         onBlur={() => {
           setLocalEditable(false);
         }}
         onKeyUp={(e) => {
-          if (e.key === "Escape") setLocalEditable(false);
+          if (autoToggle && e.key === "Escape") setLocalEditable(false);
         }}
         tagName="div"
         onDoubleClick={() => {
-          editable && setLocalEditable(true);
+          (autoToggle && editable) && setLocalEditable(true);
         }}
       />
   );

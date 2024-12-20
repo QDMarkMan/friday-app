@@ -14,7 +14,7 @@ export default function Home() {
       <Titlebar />
 
       <div className="pt-1 flex justify-center">
-        <div className="w-full rounded-lg">
+        <div className="w-full">
           <InStage/>
         </div>
       </div>

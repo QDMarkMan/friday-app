@@ -11,22 +11,18 @@ import BlockEditor, { BlockEditorProps } from "./block-editor";
 const StageInput: React.FC<BlockEditorProps> = ({ className, ...props }) => {
 
   return (
-    <div className="flex items-center flex-1">
-      {/* <Input
-        className={cn(
-          "flex h-11 w-full bg-transparent py-3 text-sm !border-none focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0  placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50",
-          className
-        )}
-        placeholder="Type your content here..."
-        {...props}
-      /> */}
-      <div className="flex-1 bg-background">
+    <div className="flex flex-row items-center flex-1 bg-background overflow-hidden max-h-[30vh]">
+      <div className="flex-1 flex flex-col h-full bg-background">
         <BlockEditor
+          className="h-full min-h-4 text-sm p-1"
+          placeholder="Type your content here..."
           {...props}
         />
       </div>
-      <div className="shrink-0" >
-        <SparklesIcon />
+      <div className="shrink-0 p-1" >
+        <span className="w-4 h-4">
+          <SparklesIcon />
+        </span>
       </div>
     </div>
   );

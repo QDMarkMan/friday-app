@@ -14,8 +14,8 @@ export type StageOutputProps = {
 
 export const StageOutput: React.FC<StageOutputProps> = ({ className }) => {
   return (
-    <div className={cn('w-full rounded-sm', className)}>
-      <div className="glow min-h-36 text-4xl font-bold text-center">
+    <div className={cn('w-full rounded-md relative', className)}>
+      <div className="min-h-12">
         <span>Output</span>
       </div>
     </div>

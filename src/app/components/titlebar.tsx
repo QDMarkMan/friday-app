@@ -14,10 +14,9 @@ import React from 'react';
 export const Titlebar: React.FC = () => {
   return (
     <div data-tauri-drag-region  className="flex items-center justify-between w-full p-1 
-    bg-white backdrop-filter backdrop-blur-md
-    z-50">
+    bg-white backdrop-filter backdrop-blur-md rounded-md overflow-hidden z-50 cursor-pointer">
       <div className="flex items-center">
-        Logo
+        Logo 
       </div>
       <div className="flex items-center">
         <div className="rounded-full ml-2">
