@@ -17,7 +17,7 @@ import {
   CommandShortcut
 } from '@/components/ui/command'
 
-import { WorkflowIcon, UserIcon, CalendarCogIcon, SettingsGearIcon } from './icons'
+import { WorkflowIcon, UserIcon, CalendarCogIcon, SettingsGearIcon } from './animated-icons'
 
 const OperatePanel: React.FC = () => {
   return (

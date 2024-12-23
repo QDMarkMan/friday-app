@@ -20,3 +20,7 @@ bun dev
 
 - Next.js
 - Tauri
+
+## UI Reference
+
+> [awesome-shadcn-ui](https://github.com/birobirobiro/awesome-shadcn-ui/blob/main/README.md)

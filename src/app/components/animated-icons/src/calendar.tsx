@@ -2,13 +2,14 @@
 
 import type { Variants } from 'motion/react'
 import { motion, useAnimation } from 'motion/react'
+import type { AnimatedIconProps } from '../part/props'
 
 const gVariants: Variants = {
   normal: { rotate: 0 },
   animate: { rotate: 180 }
 }
 
-const CalendarCogIcon = () => {
+const CalendarCogIcon = ({ size = 24 }: AnimatedIconProps) => {
   const controls = useAnimation()
 
   return (
@@ -19,8 +20,8 @@ const CalendarCogIcon = () => {
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="24"
+        width={size}
+        height={size}
         viewBox="0 0 24 24"
         fill="none"
         stroke="currentColor"

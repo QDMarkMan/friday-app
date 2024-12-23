@@ -5,7 +5,7 @@
  *-------------------------------------------------------------------------------------------- */
 
 import type React from 'react'
-import { SparklesIcon } from './icons'
+import { SparklesIcon } from './animated-icons'
 import BlockEditor, { type BlockEditorProps } from './block-editor'
 
 const StageInput: React.FC<BlockEditorProps> = ({ className, ...props }) => {

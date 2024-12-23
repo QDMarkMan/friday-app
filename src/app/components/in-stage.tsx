@@ -8,7 +8,6 @@
 import type React from 'react'
 import { useEffect, useState } from 'react'
 import StageInput from '@/app/components/stage-input'
-// import OperatePanel from "./operate-panel";
 import { StageOutput } from './stage-output'
 import { getClipboardContent, getCurrentText } from '@/lib/commands'
 import { type Event, listen } from '@tauri-apps/api/event'
@@ -26,20 +25,23 @@ const InStage: React.FC = () => {
     }
   }
 
+  const handleContentChange = (value: string) => {
+    setContent(value)
+  }
+
   useEffect(() => {
     listen('current-select', (event: Event<string>) => {
-      setContent(event.payload)
+      handleContentChange(event.payload)
     })
   })
 
   return (
     <>
-      <div className="rounded-md bg-background overflow-hidden">
+      <div className="rounded bg-background overflow-hidden border border-accent">
         <StageInput className="bg-background" value={content} />
         <QuickerCommands />
       </div>
-      <StageOutput className="mt-1" />
-      {/* <OperatePanel /> */}
+      <StageOutput className="mt-1 rounded bg-background overflow-hidden border border-accent" />
     </>
   )
 }
