@@ -26,6 +26,5 @@ pub fn setup(app: &mut tauri::App) -> Result<(), Box<dyn std::error::Error + 'st
     register_global_shortcuts(app)?;
     // Text
     app.manage(StringWrapper(std::sync::Mutex::new("".to_string())));
-    // setup_clipboard(app);
     Ok(())
 }

@@ -16,17 +16,17 @@ pub fn start_clipboard_monitor(handle: tauri::AppHandle) {
 }
 
 pub fn setup_clipboard(app: &mut tauri::App) {
-    // let clipboard_monitor = match get("clipboard_monitor") {
-    //     Some(v) => v.as_bool().unwrap(),
-    //     None => {
-    //         set("clipboard_monitor", false);
-    //         false
-    //     }
-    // };
+    let clipboard_monitor = match get("clipboard_monitor") {
+        Some(v) => v.as_bool().unwrap(),
+        None => {
+            set("clipboard_monitor", false);
+            false
+        }
+    };
 
-    // app.manage(ClipboardMonitorEnableWrapper(Mutex::new(
-    //     clipboard_monitor.to_string(),
-    // )));
+    app.manage(ClipboardMonitorEnableWrapper(Mutex::new(
+        clipboard_monitor.to_string(),
+    )));
     let _handle = APP_HANDLE.get().unwrap();
     dbg!(_handle);
 }

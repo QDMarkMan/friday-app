@@ -17,9 +17,11 @@ pub fn create_system_tray(app: &mut tauri::App) -> Result<(), Box<dyn std::error
 
     let _tray = TrayIconBuilder::new()
         .icon(app.default_window_icon().unwrap().clone())
+        // Mac OS only： Mac Template https://developer.apple.com/documentation/appkit/nsimage/istemplate?language=objc
+        .icon_as_template(true)
         .menu(&menu)
         .on_menu_event(|app, event| match event.id.0.as_str() {
-            "open" => display_window(Some(true)),
+            "open" => display_window(Some(false)),
             "quit" => app.exit(0),
             id => println!("Unhandled menu item: {:?}", id),
         })

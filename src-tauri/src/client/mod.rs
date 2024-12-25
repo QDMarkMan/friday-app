@@ -1,4 +1,4 @@
-pub mod clipboard;
+// pub mod clipboard;
 pub mod config;
 pub mod events;
 pub mod permissions;
