@@ -8,7 +8,7 @@ mod commands;
 mod service;
 
 use client::setup;
-use commands::{clipboard, text, window};
+use commands::{agent, clipboard, text, window};
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
@@ -24,7 +24,8 @@ pub fn run() {
         .invoke_handler(tauri::generate_handler![
             window::window_display_toggle,
             clipboard::get_clipboard,
-            text::get_selection_text
+            text::get_selection_text,
+            agent::get_agent_response
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

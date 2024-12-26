@@ -15,3 +15,8 @@ export const getCurrentText = async (): Promise<string> => {
   const response = await invoke('get_selection_text')
   return response as string
 }
+
+export const getAgentResponse = async (value: string): Promise<string> => {
+  const response = await invoke('get_agent_response', { value })
+  return response as string
+}
