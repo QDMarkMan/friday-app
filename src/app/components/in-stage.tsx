@@ -16,6 +16,7 @@ import { QuickerCommands } from './quicker-commands'
 const InStage: React.FC = () => {
   const [input, setInput] = useState<string>('')
   const [output, setOutput] = useState<string>('')
+  const [loading, setLoading] = useState(false)
 
   const handleKeyUp = async (e: React.KeyboardEvent<HTMLInputElement>) => {
     setInput(e.currentTarget.value)
@@ -27,13 +28,16 @@ const InStage: React.FC = () => {
   }
 
   const handleContentChange = async (value: string) => {
+    setOutput('')
     setInput(value)
+    setLoading(true)
     const _input = `
       把下面的句子翻译成得体的英文:
       ${value}
     `
     const response = await getAgentResponse(_input)
     setOutput(response)
+    setLoading(false)
   }
 
   useEffect(() => {
@@ -49,6 +53,7 @@ const InStage: React.FC = () => {
         <QuickerCommands />
       </div>
       <StageOutput className="mt-1 rounded bg-background overflow-hidden border border-accent" 
+        loading= {loading}
         value={output}
       />
     </>
