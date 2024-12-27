@@ -1,4 +1,4 @@
-# Friday application
+# hits application
 
 > A simple demo based `Tauri` + `Nextjs`.
 

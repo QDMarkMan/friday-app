@@ -1383,33 +1383,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "friday-app"
-version = "0.1.0"
-dependencies = [
- "arboard",
- "chrono",
- "cocoa 0.26.0",
- "get-selected-text",
- "global-hotkey",
- "log",
- "macos-accessibility-client",
- "reqwest",
- "selection",
- "serde",
- "serde_json",
- "tauri",
- "tauri-build",
- "tauri-plugin-clipboard",
- "tauri-plugin-clipboard-manager",
- "tauri-plugin-global-shortcut",
- "tauri-plugin-log",
- "tauri-plugin-os",
- "tauri-plugin-shell",
- "tokio",
- "window-vibrancy",
-]
-
-[[package]]
 name = "funty"
 version = "2.0.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1925,6 +1898,33 @@ name = "hex"
 version = "0.4.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "7f24254aa9a54b5c858eaee2f5bccdb46aaf0e486a595ed5fd8f86ba55232a70"
+
+[[package]]
+name = "hits-app"
+version = "0.1.0"
+dependencies = [
+ "arboard",
+ "chrono",
+ "cocoa 0.26.0",
+ "get-selected-text",
+ "global-hotkey",
+ "log",
+ "macos-accessibility-client",
+ "reqwest",
+ "selection",
+ "serde",
+ "serde_json",
+ "tauri",
+ "tauri-build",
+ "tauri-plugin-clipboard",
+ "tauri-plugin-clipboard-manager",
+ "tauri-plugin-global-shortcut",
+ "tauri-plugin-log",
+ "tauri-plugin-os",
+ "tauri-plugin-shell",
+ "tokio",
+ "window-vibrancy",
+]
 
 [[package]]
 name = "home"
