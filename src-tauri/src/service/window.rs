@@ -21,7 +21,10 @@ pub fn display_window(locate_window: Option<bool>) {
     if locate_window == Some(true) {
         position_window_near_cursor();
     } else {
-        get_main_window().show().unwrap();
+        let window = get_main_window();
+        window.center().unwrap();
+        window.set_focus().unwrap();
+        window.show().unwrap();
     }
 }
 
@@ -70,12 +73,6 @@ pub fn position_window_near_cursor() {
             (monitor_pos.y as f64 * scale_factor + monitor_size.height as f64 * scale_factor)
                 as i32,
         );
-
-        // Constrain window position within monitor bounds
-        // let final_pos = PhysicalPosition::new(
-        //     pos.x.max(monitor_bounds.0).min(monitor_bounds.2 as i32),
-        //     pos.y.max(monitor_bounds.1).min(monitor_bounds.3 as i32),
-        // );
 
         // Convert cursor position to physical pixels relative to monitor
         let monitor_relative_x = cursor_position.x - monitor_pos.x as f64;

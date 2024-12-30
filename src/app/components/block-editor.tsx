@@ -14,13 +14,14 @@ export type BlockEditorProps = {
   placeholder?: string
   onChange?: (value: string) => void
   onModeChange?: (mode: boolean) => void
+  onKeyUp?: (e: React.KeyboardEvent<HTMLDivElement>) => void
   className?: string
   editable?: boolean
   autoToggle?: boolean
   children?: React.ReactNode
 }
 
-const BlockEditor: React.FC<BlockEditorProps> = ({ value = '', placeholder, editable = true, autoToggle = false, onChange, onModeChange, className }) => {
+const BlockEditor: React.FC<BlockEditorProps> = ({ value = '', placeholder, editable = true, autoToggle = false, className, onChange, onModeChange, onKeyUp }) => {
   const [localValue, setLocalValue] = useState(value)
   const [localEditMode, setLocalEditable] = useState(editable)
   const divRef = React.useRef<HTMLDivElement>(null)
@@ -58,6 +59,7 @@ const BlockEditor: React.FC<BlockEditorProps> = ({ value = '', placeholder, edit
         setLocalEditable(false)
       }}
       onKeyUp={e => {
+        onKeyUp?.(e)
         if (autoToggle && e.key === 'Escape') setLocalEditable(false)
       }}
       tagName="div"

@@ -35,11 +35,17 @@ pub async fn get_model_response(input: &String) -> Result<String, reqwest::Error
         .send()
         .await?;
     let response_text = response.text().await?;
-    let response_json: serde_json::Value = serde_json::from_str(&response_text).unwrap();
+    log::info!("Response text: {:?}", response_text);
+    let response_json: serde_json::Value = match serde_json::from_str(&response_text) {
+        Ok(json) => json,
+        Err(e) => {
+            println!("Error parsing response: {:?}", e);
+            return Ok(String::from("Error parsing response"));
+        }
+    };
     let content = response_json["choices"][0]["message"]["content"]
         .as_str()
         .unwrap();
-    print!("Response: {:?}", response_json);
     println!("Response: {:?}", response_text);
     Ok(String::from(content))
 }

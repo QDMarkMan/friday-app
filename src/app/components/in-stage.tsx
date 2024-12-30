@@ -9,7 +9,7 @@ import type React from 'react'
 import { useEffect, useState } from 'react'
 import StageInput from '@/app/components/stage-input'
 import { StageOutput } from './stage-output'
-import { getAgentResponse, getClipboardContent, getCurrentText } from '@/lib/commands'
+import { getAgentResponse } from '@/lib/commands'
 import { type Event, listen } from '@tauri-apps/api/event'
 import { QuickerCommands } from './quicker-commands'
 
@@ -18,22 +18,23 @@ const InStage: React.FC = () => {
   const [output, setOutput] = useState<string>('')
   const [loading, setLoading] = useState(false)
 
-  const handleKeyUp = async (e: React.KeyboardEvent<HTMLInputElement>) => {
-    setInput(e.currentTarget.value)
-    if (e.key === 'Enter') {
-      const response = await getCurrentText()
-      const clipboard = await getClipboardContent()
-      console.log('🚀 ~ handleKeyUp ~ response:', response, clipboard)
-    }
+  const handleKeyUp = async (e: React.KeyboardEvent<HTMLDivElement>) => {
+    if (e.key === 'Enter' && e.metaKey) setOutputFromAgent(e.currentTarget.textContent ?? '')
   }
 
-  const handleContentChange = async (value: string) => {
+  const handleContentChange = async (value: string = input) => {
     setOutput('')
     setInput(value)
+    if (!value.trim()) return
+    setOutputFromAgent(value)
+  }
+
+  const setOutputFromAgent = async (value: string) => {
     setLoading(true)
     const _input = `
-      把下面的句子翻译成得体的英文:
-      ${value}
+      把我提供的全部内容翻译成得体的英文:
+      '${value}',
+      并且把翻译结果发送给我，返回数据的格式需要和内容一致.
     `
     const response = await getAgentResponse(_input)
     setOutput(response)
@@ -49,13 +50,17 @@ const InStage: React.FC = () => {
   return (
     <>
       <div className="rounded bg-background overflow-hidden border border-accent">
-        <StageInput className="bg-background" value={input} />
+        <StageInput className="bg-background" value={input} onKeyUp={handleKeyUp} onChange={value => {
+          setInput(value)
+        }} />
         <QuickerCommands />
       </div>
-      <StageOutput className="mt-1 rounded bg-background overflow-hidden border border-accent" 
-        loading= {loading}
-        value={output}
-      />
+      {
+        (output || loading) && <StageOutput className="mt-1 rounded bg-background overflow-hidden border border-accent" 
+          loading= {loading}
+          value={output}
+        />
+      }
     </>
   )
 }

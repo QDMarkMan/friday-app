@@ -12,9 +12,9 @@ use tauri_plugin_global_shortcut::{Code, GlobalShortcutExt, Modifiers, Shortcut,
 
 fn handle_active_shortcut() {
     let current_text = get_selection_text();
-    println!("Current Text: {:?}", current_text);
     emit_current_selected(&current_text);
-    display_window(Some(true));
+    let locate_window = Some(!current_text.is_empty());
+    display_window(locate_window);
 }
 
 pub fn register_global_shortcuts(app: &mut tauri::App) -> Result<(), Box<dyn std::error::Error>> {
