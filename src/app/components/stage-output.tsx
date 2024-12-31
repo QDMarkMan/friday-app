@@ -9,6 +9,7 @@ import { AnimatePresence, motion } from 'motion/react'
 import '@/app/styles/glow.scss'
 import { ToolCommands } from './tool-commands'
 import { MotionLoading } from './common/motion-loading'
+import { TypingAnimation } from '@/components/ui/typing-animation'
 
 
 export type StageOutputProps = {
@@ -18,6 +19,13 @@ export type StageOutputProps = {
 }
 
 export const StageOutput: React.FC<StageOutputProps> = ({ className, value, loading }) => {
+
+  const getOutputDuration = () => {
+    const result = value.length / 100
+    const range = [2, 5]
+    return result > range[1] ? range[1] : result < range[0] ? range[0] : result
+  }
+
   return <div className={cn('w-full rounded-md relative', className)}>
     <AnimatePresence mode="wait">
       {loading ? (
@@ -32,7 +40,7 @@ export const StageOutput: React.FC<StageOutputProps> = ({ className, value, load
         </motion.div>
       ) : (
         <>
-          <motion.div
+          {/* <motion.div
           key="content"
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
@@ -41,7 +49,10 @@ export const StageOutput: React.FC<StageOutputProps> = ({ className, value, load
           dangerouslySetInnerHTML={{ __html: value }}
         >
           
-        </motion.div>
+        </motion.div> */}
+        <TypingAnimation className='min-h-12 font-sans text-sm max-h-40 overflow-auto p-1 font-normal' duration={getOutputDuration()}>
+          {value}
+        </TypingAnimation>
 
         {value && (
           <div className='p-1'>
