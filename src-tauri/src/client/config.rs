@@ -21,7 +21,7 @@ pub fn init_globals(app: &mut tauri::App) {
         .unwrap_or_else(|_| panic!("Failed to initialize APP"));
 }
 
-pub fn init_window(app: &mut tauri::App) {
+pub fn init_main_window(app: &mut tauri::App) {
     let window = app.get_webview_window("main").unwrap();
     let _ = window.set_size(LogicalSize::new(MAIN_WINDOW_X, MAIN_WINDOW_Y));
 

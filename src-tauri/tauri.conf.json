@@ -12,11 +12,22 @@
   "app": {
     "windows": [
       {
+        "label": "main",
         "title": "hits",
         "width": 468,
         "height": 400,
         "minWidth": 368,
         "minHeight": 300,
+        "decorations": false,
+        "resizable": true,
+        "fullscreen": false,
+        "transparent": true,
+        "shadow": true,
+        "alwaysOnTop": false
+      },
+      {
+        "label": "setting",
+        "title": "Setting",
         "decorations": false,
         "resizable": true,
         "fullscreen": false,

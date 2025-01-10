@@ -4,9 +4,10 @@
  *  @Date [2024-12-02 15:53:47].
  ****************************************************************************/
 use super::global::get_main_window;
+use crate::client::config::APP_HANDLE;
 use log::info;
-use tauri::PhysicalPosition;
 
+use tauri::{LogicalSize, Manager, PhysicalPosition, WebviewWindow};
 pub fn toggle_window_display() {
     if get_main_window().is_visible().unwrap() {
         info!("Hiding window");
@@ -93,4 +94,65 @@ pub fn position_window_near_cursor() {
         window.show().unwrap();
         window.set_focus().unwrap();
     }
+}
+
+// Crate A webview window by label
+fn build_window(label: &str, title: &str, url: Option<&str>) -> (WebviewWindow, bool) {
+    let app_handle = APP_HANDLE.get().unwrap();
+    let _url = url.unwrap_or("index.html");
+
+    match app_handle.get_webview_window(label) {
+        Some(v) => {
+            info!("Window existence: {}", label);
+            v.set_focus().unwrap();
+            (v, true)
+        }
+        None => {
+            info!("Window not existence, Creating new window: {}", label);
+            let mut builder = tauri::webview::WebviewWindowBuilder::new(
+                app_handle,
+                label,
+                tauri::WebviewUrl::App(_url.into()),
+            )
+            .focused(true)
+            .title(title)
+            .visible(true);
+
+            #[cfg(target_os = "macos")]
+            {
+                builder = builder
+                    .title_bar_style(tauri::TitleBarStyle::Overlay)
+                    .hidden_title(true);
+            }
+            #[cfg(not(target_os = "macos"))]
+            {
+                builder = builder.transparent(true).decorations(false);
+            }
+            let window = builder.build().unwrap();
+            // if label != "screenshot" {
+            //     #[cfg(not(target_os = "linux"))]
+            //     set_shadow(&window, true).unwrap_or_default();
+            // }
+            (window, false)
+        }
+    }
+}
+
+pub fn configure_window(window: &WebviewWindow) {
+    #[cfg(any(windows, target_os = "macos"))]
+    {
+        window.set_decorations(false).unwrap();
+        window.set_shadow(true).unwrap();
+        window.set_resizable(true).unwrap();
+        window.set_visible_on_all_workspaces(false).unwrap();
+    }
+}
+
+pub fn build_setting_window() {
+    let (window, _) = build_window("setting", "Setting", Some("index.html/setting"));
+    window.set_size(LogicalSize::new(600, 800)).unwrap();
+    configure_window(&window);
+    window.center().unwrap();
+    window.set_focus().unwrap();
+    window.show().unwrap();
 }

@@ -49,7 +49,7 @@ const InStage: React.FC = () => {
 
   return (
     <>
-      <div className="rounded bg-background overflow-hidden border border-accent">
+      <div className="w-full rounded bg-background overflow-hidden border border-accent">
         <StageInput className="bg-background" value={input} onKeyUp={handleKeyUp} onChange={value => {
           setInput(value)
         }} />
