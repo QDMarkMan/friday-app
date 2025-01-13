@@ -133,6 +133,11 @@ fn build_window(label: &str, title: &str, url: Option<&str>) -> (WebviewWindow, 
             //     #[cfg(not(target_os = "linux"))]
             //     set_shadow(&window, true).unwrap_or_default();
             // }
+
+            #[cfg(debug_assertions)]
+            {
+                window.open_devtools();
+            }
             (window, false)
         }
     }
@@ -144,13 +149,14 @@ pub fn configure_window(window: &WebviewWindow) {
         window.set_decorations(false).unwrap();
         window.set_shadow(true).unwrap();
         window.set_resizable(true).unwrap();
-        window.set_visible_on_all_workspaces(false).unwrap();
+        window.set_always_on_top(false).unwrap();
+        window.set_visible_on_all_workspaces(true).unwrap();
     }
 }
 
 pub fn build_setting_window() {
-    let (window, _) = build_window("setting", "Setting", Some("index.html/setting"));
-    window.set_size(LogicalSize::new(600, 800)).unwrap();
+    let (window, _) = build_window("setting", "Setting", Some("/setting"));
+    window.set_size(LogicalSize::new(678, 500)).unwrap();
     configure_window(&window);
     window.center().unwrap();
     window.set_focus().unwrap();

@@ -23,6 +23,7 @@ pub fn run() {
         .plugin(tauri_plugin_shell::init())
         .invoke_handler(tauri::generate_handler![
             window::window_display_toggle,
+            window::open_setting_window,
             clipboard::get_clipboard,
             text::get_selection_text,
             agent::get_agent_response

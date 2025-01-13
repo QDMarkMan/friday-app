@@ -10,6 +10,7 @@ pub fn window_display_toggle() {
     toggle_window_display();
 }
 
+#[tauri::command]
 pub fn open_setting_window() {
     build_setting_window();
 }

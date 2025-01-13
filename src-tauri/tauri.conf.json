@@ -22,18 +22,18 @@
         "resizable": true,
         "fullscreen": false,
         "transparent": true,
-        "shadow": true,
-        "alwaysOnTop": false
+        "shadow": true
       },
       {
         "label": "setting",
-        "title": "Setting",
+        "title": "hits setting",
+        "url": "/setting",
         "decorations": false,
         "resizable": true,
         "fullscreen": false,
         "transparent": true,
         "shadow": true,
-        "alwaysOnTop": false
+        "visible": false
       }
     ],
     "macOSPrivateApi": true,

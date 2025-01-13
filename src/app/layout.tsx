@@ -19,12 +19,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={clsx(inter.className)}>
-        <main className="min-h-screen bg-transparent rounded-md text-sm">
+        <main className="min-h-screen flex flex-col bg-transparent rounded-md text-sm">
           <Titlebar />
-
-          <div className="w-full pt-1 flex justify-center">
-            {children}
-          </div>
+          {children}
         </main>
       </body>
     </html>

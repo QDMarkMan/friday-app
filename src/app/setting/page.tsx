@@ -5,8 +5,8 @@
  *-------------------------------------------------------------------------------------------- */
 export default function Setting() {
   return (
-    <div>
+    <div className="flex flex-1 bg-background rounded-md mt-1 p-1">
       <h1>Setting</h1>
     </div>
   )
-}
+} 
