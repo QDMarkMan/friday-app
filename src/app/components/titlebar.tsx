@@ -17,7 +17,10 @@ export const Titlebar: React.FC = () => {
   return (
     <div
       data-tauri-drag-region
-      className="flex items-center justify-between w-full p-1
+      className="
+      absolute top-0 left-0
+      flex items-center justify-between w-full p-1
+      h-[var(--size-titlebar)]
     bg-white backdrop-filter backdrop-blur-md rounded-md overflow-hidden z-50 cursor-pointer"
     >
       <div className="flex items-center">
