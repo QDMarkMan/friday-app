@@ -4,73 +4,36 @@ import type * as React from 'react'
 import { BookOpen, Frame, PieChart, Settings2 } from 'lucide-react'
 
 import { NavMain } from '@/app/components/layout/nav-main'
-import { NavProjects } from '@/app/components/layout/nav-projects'
-import { NavUser } from '@/app/components/layout/nav-user'
 import { TeamSwitcher } from '@/app/components/layout/team-switcher'
-import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarRail } from '@/components/ui/sidebar'
+import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarRail } from '@/app/components/layout/parts/sidebar'
 import Logo  from '@/app/assets/logo.png'
 import Image from 'next/image'
+import { VersionFooter } from '../version-footer'
 
 // This is sample data.
 const data = {
-  user: {
-    name: 'shadcn',
-    email: 'm@example.com',
-    avatar: '/avatars/shadcn.jpg'
-  },
   teams: [
     {
-      name: 'Acme Inc',
+      name: 'Hits App',
       logo:  () => <Image src={Logo} alt="Logo" width={32} height={32} />,
-      plan: 'Enterprise'
+      plan: 'Hit your goals'
     },
   ],
   navMain: [
     {
-      title: 'Documentation',
+      title: 'About',
       url: '#',
       icon: BookOpen,
-      items: [
-        {
-          title: 'Introduction',
-          url: '#'
-        }
-      ]
+    },
+    {
+      title: 'Models',
+      url: '#',
+      icon: Settings2,
     },
     {
       title: 'Settings',
       url: '#',
-      icon: Settings2,
-      items: [
-        {
-          title: 'General',
-          url: '#'
-        },
-        {
-          title: 'Team',
-          url: '#'
-        },
-        {
-          title: 'Billing',
-          url: '#'
-        },
-        {
-          title: 'Limits',
-          url: '#'
-        }
-      ]
-    }
-  ],
-  projects: [
-    {
-      name: 'Design Engineering',
-      url: '#',
-      icon: Frame
-    },
-    {
-      name: 'Sales & Marketing',
-      url: '#',
-      icon: PieChart
+      icon: Settings2
     }
   ]
 }
@@ -83,10 +46,11 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       </SidebarHeader>
       <SidebarContent>
         <NavMain items={data.navMain} />
-        <NavProjects projects={data.projects} />
+        {/* <NavProjects projects={data.projects} /> */}
       </SidebarContent>
       <SidebarFooter>
-        <NavUser user={data.user} />
+        {/* <NavUser user={data.user} /> */}
+        <VersionFooter />
       </SidebarFooter>
       <SidebarRail />
     </Sidebar>

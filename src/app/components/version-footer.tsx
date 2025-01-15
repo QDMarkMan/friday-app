@@ -9,9 +9,9 @@ import clsx from 'clsx';
 export const VersionFooter: React.FC<{ className?: string }> = ({ className }) => {
   
   return (
-    <footer className={clsx('bg-background rounded-md', className)}>
+    <footer className={clsx('rounded-md', className)}>
         <p className="text-xs text-muted-foreground">
-          <span className="mr-1">Version: {pkg?.version}</span>
+          <span className="mr-1">V{pkg?.version}</span>
           <span className="border-l pl-1 border-border">© Hits 2024 - {new Date().getFullYear()}</span>
         </p> 
     </footer>

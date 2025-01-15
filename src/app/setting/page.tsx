@@ -15,33 +15,33 @@ import {
   SidebarInset,
   SidebarProvider,
   SidebarTrigger,
-} from "@/components/ui/sidebar"
+} from "@/app/components/layout/parts/sidebar"
 
 export default function Setting() {
   return (
     <div className="pt-[var(--size-titlebar)] w-full h-full">
       <div className="pt-1 w-full h-full">
         <div className="w-full h-full relative bg-background rounded-md overflow-auto">
-          <SidebarProvider>
-            <AppSidebar variant="inset" />
+          <SidebarProvider className="pt-2 pr-2 pb-2">
+            <AppSidebar variant="inset"/>
               <SidebarInset>
-                <header className="flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12">
-                  <div className="flex items-center gap-2 px-4">
+                <header className="flex h-12 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12">
+                  <div className="flex items-center gap-2 px-2">
                     <SidebarTrigger className="-ml-1" />
                     <Separator orientation="vertical" className="mr-2 h-4" />
                     <Breadcrumb>
                       <BreadcrumbList>
                         <BreadcrumbItem className="hidden md:block">
                           <BreadcrumbLink href="#">
-                            Building Your Application
+                            Setting
                           </BreadcrumbLink>
                         </BreadcrumbItem>
                       </BreadcrumbList>
                     </Breadcrumb>
                   </div>
                 </header>
-                <div className="">
-                  Setting
+                <div className="px-2">
+                  The Setting Page
                 </div>
               </SidebarInset>
           </SidebarProvider>

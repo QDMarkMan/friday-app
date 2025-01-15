@@ -23,7 +23,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
   useSidebar,
-} from "@/components/ui/sidebar"
+} from "@/app/components/layout/parts/sidebar"
 
 export function NavProjects({
   projects,
