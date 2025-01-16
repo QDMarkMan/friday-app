@@ -5,10 +5,10 @@
  *-------------------------------------------------------------------------------------------- */
 'use client'
 
-export default function SettingPage() {
+export default function Page() {
   return (
     <div className="w-full h-full">
-      The Setting Page
+      The Commands Page
     </div>
   )
 }

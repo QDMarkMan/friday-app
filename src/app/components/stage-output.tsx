@@ -53,7 +53,6 @@ export const StageOutput: React.FC<StageOutputProps> = ({ className, value, load
         <TypingAnimation className='min-h-12 font-sans text-sm max-h-40 overflow-auto p-1 font-normal' duration={getOutputDuration()}>
           {value}
         </TypingAnimation>
-
         {value && (
           <div className='p-1'>
             <ToolCommands />

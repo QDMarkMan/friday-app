@@ -1,15 +1,14 @@
 'use client'
 
 import type * as React from 'react'
-import { BookOpen, Frame, PieChart, Settings2 } from 'lucide-react'
+import { BlendIcon, BookOpen, Settings2, SquareTerminalIcon } from 'lucide-react'
 
-import { NavMain } from '@/app/components/layout/nav-main'
-import { TeamSwitcher } from '@/app/components/layout/team-switcher'
+import NavMain from '@/app/components/layout/nav/nav-main'
+import { TeamSwitcher } from '@/app/components/layout/nav/team-switcher'
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarRail } from '@/app/components/layout/parts/sidebar'
 import Logo  from '@/app/assets/logo.png'
 import Image from 'next/image'
-import { VersionFooter } from '../version-footer'
-
+import { VersionFooter } from '@/app/components/version-footer'
 // This is sample data.
 const data = {
   teams: [
@@ -28,17 +27,23 @@ const data = {
     {
       title: 'Models',
       url: '#',
-      icon: Settings2,
+      icon: BlendIcon,
+    },
+    {
+      title: 'Commands',
+      url: '/commands',
+      icon: SquareTerminalIcon,
     },
     {
       title: 'Settings',
-      url: '#',
+      url: '/setting',
       icon: Settings2
     }
   ]
 }
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+
   return (
     <Sidebar collapsible="icon" {...props}>
       <SidebarHeader>

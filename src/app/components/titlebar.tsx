@@ -1,6 +1,6 @@
 /****************************************************************************
- *  @Copyright 2024 XtalPi Systems.
- *  @Author [tongfu.e@xtalpi.com].
+  *  @Author [Tongfu.E].
+ *  @Email [etongfu@outlook.com].
  *  @Date [2024-12-19 10:45:01].
  *  @Description .A custom title bar for the Tauri.
  *  @Others

@@ -14,6 +14,8 @@ import {
   SidebarMenuSubItem
 } from '@/app/components/layout/parts/sidebar'
 import type React from 'react'
+import { usePathname } from 'next/navigation';
+import Link from 'next/link'
 
 type MenuItemType = {
   title: string
@@ -26,24 +28,35 @@ type MenuItemType = {
   }[]
 }
 
-const MenuChildItem = ({ item, children }: { item: MenuItemType; children?: React.ReactNode }) => {
+type MenuChildItemProps = {
+  item: MenuItemType;
+  children?: React.ReactNode
+}
+
+const MenuChildItem = ({ item, children }: MenuChildItemProps) => {
+
   return (
-    <SidebarMenuButton tooltip={item.title}>
-      {item.icon && <item.icon />}
-      <span>{item.title}</span>
-      {children}
-    </SidebarMenuButton>
+    <SidebarMenuItem>
+      <Link href={item.url}>
+        <SidebarMenuButton tooltip={item.title} isActive={item.isActive}>
+          {item.icon && <item.icon />}
+          <span>{item.title}</span>
+          {children}
+        </SidebarMenuButton>
+      </Link>
+    </SidebarMenuItem>
   )
 }
 
 ;<ChevronRight className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
 
-const MenuChildrenItem = ({ item }: { item: MenuItemType }) => {
+const MenuChildrenItem = ({ item }: MenuChildItemProps) => {
+
   return (
     <Collapsible key={item.title} asChild defaultOpen={item.isActive} className="group/collapsible">
       <SidebarMenuItem>
         <CollapsibleTrigger asChild>
-          <SidebarMenuButton tooltip={item.title}>
+          <SidebarMenuButton tooltip={item.title} isActive={item.isActive}>
             {item.icon && <item.icon />}
             <span>{item.title}</span>
           </SidebarMenuButton>
@@ -70,16 +83,26 @@ const MenuChildrenItem = ({ item }: { item: MenuItemType }) => {
   )
 }
 
-export function NavMain({
-  items
+export default function NavMain({
+  items, 
+  activeURL
 }: {
   items: MenuItemType[]
+  activeURL?: string
 }) {
+  
+  const pathname = usePathname()
+
+  const processedItems = items.map(item => ({
+    ...item,
+    isActive: item.url === pathname
+  }))
+  
   return (
     <SidebarGroup>
       <SidebarGroupLabel>Platform</SidebarGroupLabel>
       <SidebarMenu>
-        {items.map((item) => (
+        {processedItems.map((item) => (
           (item?.items || []).length > 0 ? <MenuChildrenItem key={item.title} item={item} /> : <MenuChildItem key={item.title} item={item} />
         ))}
       </SidebarMenu>
