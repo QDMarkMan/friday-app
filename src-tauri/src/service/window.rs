@@ -156,7 +156,7 @@ pub fn configure_window(window: &WebviewWindow) {
 
 pub fn build_setting_window() {
     let (window, _) = build_window("setting", "Setting", Some("/setting"));
-    window.set_size(LogicalSize::new(678, 500)).unwrap();
+    window.set_size(LogicalSize::new(845, 560)).unwrap();
     configure_window(&window);
     window.center().unwrap();
     window.set_focus().unwrap();

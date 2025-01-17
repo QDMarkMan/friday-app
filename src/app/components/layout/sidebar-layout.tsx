@@ -19,20 +19,20 @@ const SidebarLayout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
           <SidebarProvider className="pt-2 pr-2 pb-2">
             <AppSidebar variant="inset" />
             <SidebarInset>
-              <header className="flex h-12 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12">
-                <div className="flex items-center gap-2 px-2">
+              <header className="flex h-12 shrink-0 items-center transition-[width,height] ease-linear">
+                <div className="flex items-center px-2">
                   <SidebarTrigger className="-ml-1" />
                   <Separator orientation="vertical" className="mr-2 h-4" />
                   <Breadcrumb>
                     <BreadcrumbList>
-                      <BreadcrumbItem className="hidden md:block">
-                        <BreadcrumbLink href="#">Setting</BreadcrumbLink>
+                      <BreadcrumbItem>
+                        <BreadcrumbLink href="#">Manage Your Commands</BreadcrumbLink>
                       </BreadcrumbItem>
                     </BreadcrumbList>
                   </Breadcrumb>
                 </div>
               </header>
-              <div className="px-2 w-full h-full">
+              <div className="px-2 flex-1 min-h-0">
                 {children}                
               </div>
             </SidebarInset>
