@@ -101,6 +101,11 @@ fn build_window(label: &str, title: &str, url: Option<&str>) -> (WebviewWindow, 
     let app_handle = APP_HANDLE.get().unwrap();
     let _url = url.unwrap_or("index.html");
 
+    info!(
+        "Building window with label: {}, title: {}, url: {}",
+        label, title, _url
+    );
+
     match app_handle.get_webview_window(label) {
         Some(v) => {
             info!("Window existence: {}", label);
@@ -155,7 +160,7 @@ pub fn configure_window(window: &WebviewWindow) {
 }
 
 pub fn build_setting_window() {
-    let (window, _) = build_window("setting", "Setting", Some("/setting"));
+    let (window, _) = build_window("setting", "Setting", Some("/commands"));
     window.set_size(LogicalSize::new(845, 560)).unwrap();
     configure_window(&window);
     window.center().unwrap();

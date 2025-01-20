@@ -45,9 +45,9 @@ export default function Page() {
 
   return (
     <ScrollArea className="w-ful h-full">
-      {Array.from({length: 5}, () => cards[0]).map((card, index) => (
+      {Array.from({length: 5}, () => cards[0]).map((card, index:number) => (
         <CommandCard
-          key={`card-${index}`}
+          key={`card-${index+card.id}`}
           className="mb-3"
           {...card}
           onLike={() => handleAction(card.id, 'liked')}

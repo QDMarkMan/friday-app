@@ -27,7 +27,7 @@
       {
         "label": "setting",
         "title": "hits setting",
-        "url": "/setting",
+        "url": "/commands",
         "decorations": false,
         "resizable": true,
         "fullscreen": false,

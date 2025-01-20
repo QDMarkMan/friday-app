@@ -94,7 +94,7 @@ export function CommandCard({
                   {author?.name}
                 </h3>
                 <p className="text-xs text-zinc-500 dark:text-zinc-400">
-                  @{author?.username} · {author?.timeAgo}
+                {author?.timeAgo}
                 </p>
               </div>
             </div>
