@@ -11,8 +11,8 @@ export type CommandSchema = {
   title: string
   description: string
   command: string
-  sort: number
-  icon: string
+  sort?: number
+  icon?: string
   isDefault: boolean
   modelId: number
 } & BasicSchema

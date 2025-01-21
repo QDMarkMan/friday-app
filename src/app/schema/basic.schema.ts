@@ -5,7 +5,7 @@
  ***************************************************************************/
 
 export type BasicSchema = {
-  id: string,
+  id: string | number,
   createdAt?: string,
   updatedAt?: string,
   deletedAt?: string,
