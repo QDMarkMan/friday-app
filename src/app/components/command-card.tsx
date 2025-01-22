@@ -2,27 +2,32 @@
 'use client'
 
 import { cn } from '@/lib/utils'
-import { Heart, MessageCircle, Share2, Bookmark, MoreHorizontal, Link as LinkIcon } from 'lucide-react'
+import { Bot, MessageCircle, Share2, Bookmark, MoreHorizontal, Link as LinkIcon } from 'lucide-react'
 import { useState } from 'react'
 import type { CommandSchema } from '../schema/command.schema'
+import BlockEditor from './block-editor'
 
 type CommandCardProps = {
-  onLike?: () => void
-  onComment?: () => void
-  onShare?: () => void
   onDefault?: () => void
-  onMore?: () => void
+  onCommand?: (value: string) => void
   className?: string
 } & CommandSchema
 
 export function CommandCard(props: CommandCardProps) {
-  const { onLike, onComment, onShare, onDefault, onMore, className } = props
+  const { onCommand, onDefault, className } = props
 
   const [isDefault, setIsDefault] = useState(props.isDefault ?? false)
+  const [localCommand, setLocalCommand] = useState(props.command)
+  const [localDescription, setLocalDescription] = useState(props.description)
 
   const handleSetDefault = () => {
     setIsDefault(!isDefault)
     onDefault?.()
+  }
+
+  const handleCommandChange = (value: string) => {
+    setLocalCommand(value)
+    onCommand?.(value)
   }
 
   return (
@@ -41,19 +46,27 @@ export function CommandCard(props: CommandCardProps) {
           {/* Author section */}
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-2">
-              <img src={props?.icon} alt={props?.name} className="w-10 h-10 rounded-full ring-2 ring-white dark:ring-zinc-800" />
+              {/* <img src={props?.icon} alt={props?.name} className="w-10 h-10 rounded-full ring-2 ring-white dark:ring-zinc-800" /> */}
+              <span className="w-10 h-10 flex justify-center items-center rounded-full ring-2 ring-white dark:ring-zinc-800 border border-solid border-zinc-200 dark:border-zinc-800">
+                <Bot />
+              </span>
               <div>
-                <h3 className="text-sm font-medium text-zinc-900 dark:text-zinc-100">{props?.name}</h3>
+                <h4 className="text-sm font-medium text-zinc-900 dark:text-zinc-100">{props?.name}</h4>
                 <p className="text-xs text-zinc-500 dark:text-zinc-400">{props?.createdAt}</p>
               </div>
             </div>
-            <button type="button" onClick={onMore} className="p-2 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-full transition-colors">
+            <button type="button" className="p-2 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-full transition-colors">
               <MoreHorizontal className="w-5 h-5 text-zinc-400" />
             </button>
           </div>
-
-          {/* Content section */}
-          <p className="text-zinc-600 dark:text-zinc-300 mb-4">{props?.description}</p>
+          {/* Description section */}
+          {/* <div className="text-zinc-600 dark:text-zinc-300 mb-4">
+            <BlockEditor placeholder='Please input your command' value={localDescription} onChange={setLocalDescription} />
+          </div> */}
+          {/* Command section */}
+          <div className="text-zinc-600 dark:text-zinc-300">
+            <BlockEditor placeholder='Please input your command' value={localCommand} onChange={handleCommandChange} />
+          </div>
           {/* Link preview */}
           {/* {content?.link && (
             <div className="mb-3 rounded-2xl border border-zinc-200 dark:border-zinc-700 overflow-hidden">

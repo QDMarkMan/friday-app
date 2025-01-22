@@ -45,7 +45,7 @@ const BlockEditor: React.FC<BlockEditorProps> = ({ value = '', placeholder, edit
       className={cn(
         'block-render relative outline-none caret-blue-500',
         {
-          'cursor-pointer': editable,
+          'cursor-pointer':!editable,
           'cursor-text': localEditMode,
           'before:content-[attr(data-placeholder)] before:absolute before:text-muted-foreground before:pointer-events-none': !localValue && placeholder
         },
