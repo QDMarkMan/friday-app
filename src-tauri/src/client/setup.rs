@@ -7,11 +7,9 @@
 use log::info;
 use tauri::Manager;
 
-use crate::client::config::StringWrapper;
-
 use super::{
     // clipboard::setup_clipboard,
-    config::{init_globals, init_main_window},
+    config::{init_globals, init_main_window, StringWrapper},
     permissions::setup_permissions,
     shortcut::register_global_shortcuts,
     tray::create_system_tray,
