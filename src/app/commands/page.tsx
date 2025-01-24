@@ -5,10 +5,11 @@
  *-------------------------------------------------------------------------------------------- */
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { CommandCard } from '@/app/components/command-card'
 import type { CommandSchema } from '../schema/command.schema'
+import { CommandsData } from '@/lib/commands'
 
 export default function Page() {
   const [cards, setCards] = useState<CommandSchema[]>([
@@ -31,6 +32,15 @@ export default function Page() {
   const handleCommandChange =  (command: CommandSchema, value: string) => {
     console.log("🚀 ~ handleCommandChange ~ command:", command, value)
   }
+
+  const loadCommands = async () => {
+    const response = await CommandsData.getLocalCommandsData()
+    console.log("🚀 ~ loadCommands ~ response:", response)
+  }
+
+  useEffect(() => {
+    loadCommands()
+  })
 
   return (
     <ScrollArea className="w-ful h-full">

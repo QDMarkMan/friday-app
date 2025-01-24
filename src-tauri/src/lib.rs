@@ -6,10 +6,12 @@
 mod client;
 mod commands;
 mod db;
+mod schema;
 mod service;
+mod utils;
 
 use client::setup;
-use commands::{agent, clipboard, text, window};
+use commands::{agent, clipboard, data, text, window};
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
@@ -27,7 +29,8 @@ pub fn run() {
             window::open_setting_window,
             clipboard::get_clipboard,
             text::get_selection_text,
-            agent::get_agent_response
+            agent::get_agent_response,
+            data::get_local_commands_data
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

@@ -38,7 +38,8 @@ reqwest = "0.12.9"
 tokio = { version = "1.42.0", features = ["full"] }
 tauri-plugin-sql = { version = "2.2.0", features = ["sqlite"] }
 dirs = "6.0.0"
-sqlx = "0.8.3"
+sqlx = { version = "0.8.3", features = ["sqlite"] }
+time = { version = "0.3.37", features = ["serde"] }
 
 
 # you can add the dependencies on the `[dependencies]` section if you do not target mobile

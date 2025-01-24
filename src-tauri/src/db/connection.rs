@@ -5,11 +5,16 @@
  ***************************************************************************/
 use log;
 use sqlx::SqlitePool;
-use std::path::{Path, PathBuf};
+use std::{
+    path::{Path, PathBuf},
+    sync::OnceLock,
+};
 
 const DB_DIR_NAME: &str = ".hits";
 const DB_FILE_NAME: &str = "hits.sqlite";
 const DEV_DB_FILE_NAME: &str = "hits-dev.sqlite";
+
+pub static APP_POOL: OnceLock<SqlitePool> = OnceLock::new();
 
 fn get_db_dir() -> PathBuf {
     let home = dirs::home_dir().unwrap();
@@ -47,7 +52,7 @@ fn get_database_url(db_filename: &str) -> String {
     format!("sqlite://{}?mode=rwc", db_file.to_str().unwrap())
 }
 
-pub async fn get_db_pool() -> Result<SqlitePool, sqlx::Error> {
+pub async fn init_pool() -> Result<(), sqlx::Error> {
     init_db_file();
     let db_url = if cfg!(debug_assertions) {
         get_database_url(DEV_DB_FILE_NAME)
@@ -59,7 +64,11 @@ pub async fn get_db_pool() -> Result<SqlitePool, sqlx::Error> {
     {
         log::info!("Database URL: {}", db_url);
     }
-    let db = SqlitePool::connect(&db_url).await?;
+    let db = SqlitePool::connect(&db_url)
+        .await
+        .expect("Failed to connect to database");
     log::info!("Database connected: {:?}", db);
-    Ok(db)
+    // Ok(db)
+    APP_POOL.set(db).unwrap();
+    Ok(())
 }
