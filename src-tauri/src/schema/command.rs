@@ -3,10 +3,14 @@
  *  @Author [etongfu@outlook.com].
  *  @Date [2025-01-24 14:11:51].
  ***************************************************************************/
-use serde::Serialize;
+use crate::utils::serialize::{
+    serialize_datetime_as_timestamp, serialize_option_datetime_as_timestamp,
+};
+use serde::{Deserialize, Serialize};
 use time::OffsetDateTime;
 
-#[derive(Debug, Serialize)]
+#[derive(Debug, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
 pub struct CommandSchema {
     pub name: Option<String>,
     pub description: Option<String>,
@@ -17,7 +21,13 @@ pub struct CommandSchema {
     pub model_id: Option<i64>,
     // Common fields
     pub id: i64,
+    // pub created_at: OffsetDateTime,
+    // pub updated_at: OffsetDateTime,
+    // pub deleted_at: Option<OffsetDateTime>,
+    #[serde(serialize_with = "serialize_datetime_as_timestamp")]
     pub created_at: OffsetDateTime,
+    #[serde(serialize_with = "serialize_datetime_as_timestamp")]
     pub updated_at: OffsetDateTime,
+    #[serde(serialize_with = "serialize_option_datetime_as_timestamp")]
     pub deleted_at: Option<OffsetDateTime>,
 }

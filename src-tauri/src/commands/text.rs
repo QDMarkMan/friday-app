@@ -5,12 +5,12 @@
  ****************************************************************************/
 use crate::client::config::{StringWrapper, APP_HANDLE};
 use log::info;
+use selection::get_text;
 use tauri::Manager;
 
 #[tauri::command]
 pub fn get_selection_text() -> String {
     // _state: tauri::State<StringWrapper>
-    use selection::get_text;
     let text = get_text();
     if !text.trim().is_empty() {
         let app = APP_HANDLE.get().unwrap();

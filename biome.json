@@ -31,7 +31,14 @@
     ]
   },
   "organizeImports": { "enabled": true },
-  "linter": { "enabled": true, "rules": { "recommended": true } },
+  "linter": { "enabled": true, 
+    "rules": { 
+      "recommended": true,
+      "correctness": {
+        "useExhaustiveDependencies": "off"
+      }
+    } 
+  },
   "javascript": {
     "formatter": {
       "jsxQuoteStyle": "double",
