@@ -21,6 +21,7 @@ pub struct CommandSchema {
     pub model_id: Option<i64>,
     // Common fields
     pub id: i64,
+    pub uuid: String,
     // pub created_at: OffsetDateTime,
     // pub updated_at: OffsetDateTime,
     // pub deleted_at: Option<OffsetDateTime>,

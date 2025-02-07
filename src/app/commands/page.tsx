@@ -12,6 +12,8 @@ import type { CommandSchema } from '../schema/command.schema'
 import { CommandsData } from '@/lib/commands'
 import type { ResponseSchema } from '@/app/schema/response.schema'
 import { format } from 'date-fns'
+import { Button } from '@/components/ui/button'
+import type { CommandDataSchema } from '../schema/command.schema'
 
 export default function Page() {
   const [cards, setCards] = useState<CommandSchema[]>([])
@@ -35,6 +37,20 @@ export default function Page() {
     }
   }
 
+  const handleCreateCommand = () => { 
+    const data: CommandDataSchema = {
+      id: -1,
+      name: '',
+      title: '',
+      description: '',
+      command: '',
+      isDefault: false,
+      modelId: 0
+    }
+    cards.push(data as CommandSchema)
+    setCards([...cards])
+  }
+
   useEffect(() => {
     loadCommands()
   }, [])
@@ -50,6 +66,11 @@ export default function Page() {
           onCommand={(command: string) => handleCommandChange(card, command)}
         />
       ))}
+
+      {/* Add a new command button */}
+      <Button variant="ghost" className="w-full my-2" onClick={handleCreateCommand}>
+        Create
+      </Button>
     </ScrollArea>
   )
 }

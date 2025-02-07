@@ -35,3 +35,11 @@ pub async fn get_local_commands_data() -> Result<Response<Vec<CommandSchema>>, A
     let result = Response::success(data);
     Ok(result)
 }
+
+#[tauri::command]
+pub async fn create_local_command(json: String) -> Result<Response<()>, AppError> {
+    let command: CommandSchema = serde_json::from_str(&json).unwrap();
+    service::commands::create_command(command).await?;
+    let result = Response::success(());
+    Ok(result)
+}

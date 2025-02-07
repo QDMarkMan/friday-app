@@ -30,7 +30,8 @@ pub fn run() {
             clipboard::get_clipboard,
             text::get_selection_text,
             agent::get_agent_response,
-            data::get_local_commands_data
+            data::get_local_commands_data,
+            data::create_local_command
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

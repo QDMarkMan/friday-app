@@ -6,7 +6,7 @@
 
 import type { BasicSchema } from './basic.schema'
 
-export type CommandSchema = {
+export type CommandDataSchema = {
   name: string
   title: string
   description: string
@@ -14,5 +14,8 @@ export type CommandSchema = {
   sort?: number
   icon?: string
   isDefault: boolean
-  modelId: number
-} & BasicSchema
+  modelId: number,
+  [key: string]: unknown
+}
+
+export type CommandSchema = CommandDataSchema & BasicSchema

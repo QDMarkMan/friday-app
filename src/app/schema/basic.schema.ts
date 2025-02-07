@@ -6,6 +6,7 @@
 
 export type BasicSchema = {
   id: string | number,
+  uuid: string,
   createdAt: string,
   updatedAt?: string,
   deletedAt?: string,
