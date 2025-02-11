@@ -8,12 +8,11 @@
 import { useEffect, useState } from 'react'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { CommandCard } from '@/app/components/command-card'
-import type { CommandSchema } from '../schema/command.schema'
+import type { CommandSchema, CommandDataSchema } from '@/app/schema/command.schema'
 import { CommandsData } from '@/lib/commands'
 import type { ResponseSchema } from '@/app/schema/response.schema'
 import { format } from 'date-fns'
 import { Button } from '@/components/ui/button'
-import type { CommandDataSchema } from '../schema/command.schema'
 
 export default function Page() {
   const [cards, setCards] = useState<CommandSchema[]>([])
@@ -22,8 +21,10 @@ export default function Page() {
     console.log(`Card ${id}: ${action}`)
   }
 
-  const handleCommandChange = (command: CommandSchema, value: string) => {
-    console.log('🚀 ~ handleCommandChange ~ command:', command, value)
+  const handleCommandChange = (command: CommandSchema, newCommand: CommandSchema) => {
+    if (command.id === -1) {
+      doCreateCommand(newCommand)
+    }
   }
 
   const loadCommands = async () => {
@@ -37,7 +38,7 @@ export default function Page() {
     }
   }
 
-  const handleCreateCommand = () => { 
+  const handleCreateCommand = () => {
     const data: CommandDataSchema = {
       id: -1,
       name: '',
@@ -51,6 +52,13 @@ export default function Page() {
     setCards([...cards])
   }
 
+  const doCreateCommand = async (command: CommandDataSchema) => {
+    if (!command.name || !command.command) return
+    console.log("🚀 ~ command:", command)
+    const response = await CommandsData.createCommand(command)
+    console.log('🚀 ~ doCreateCommand ~ response:', command, response)
+  }
+
   useEffect(() => {
     loadCommands()
   }, [])
@@ -61,9 +69,9 @@ export default function Page() {
         <CommandCard
           key={`card-${index + card.id.toString()}`}
           className="mb-3"
-          {...card}
+          data={card}
           onDefault={() => handleAction(card.id, 'bookmarked')}
-          onCommand={(command: string) => handleCommandChange(card, command)}
+          onCommand={(command: CommandSchema) => handleCommandChange(card, command)}
         />
       ))}
 

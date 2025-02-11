@@ -6,7 +6,10 @@
 
 use sqlx::Error;
 
-use crate::{db, schema::command::CommandSchema};
+use crate::{
+    db,
+    schema::command::{CommandRequest, CommandSchema},
+};
 
 const TABLE_NAME: &str = "commands";
 
@@ -41,7 +44,7 @@ pub async fn load_all_commands() -> Result<Vec<CommandSchema>, sqlx::Error> {
     Ok(rows)
 }
 
-pub async fn create_command(data: CommandSchema) -> Result<(), sqlx::Error> {
+pub async fn create_command(data: CommandRequest) -> Result<(), sqlx::Error> {
     use uuid::Uuid;
 
     let db = db::connection::APP_POOL

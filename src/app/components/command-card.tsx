@@ -2,23 +2,25 @@
 'use client'
 
 import { cn } from '@/lib/utils'
-import { Bot, MessageCircle, Share2, Bookmark, MoreHorizontal, Link as LinkIcon } from 'lucide-react'
+import { Bot, Bookmark, MoreHorizontal, Link as LinkIcon } from 'lucide-react'
 import { useState } from 'react'
 import type { CommandSchema } from '../schema/command.schema'
 import BlockEditor from './block-editor'
 
 type CommandCardProps = {
   onDefault?: () => void
-  onCommand?: (value: string) => void
-  className?: string
-} & CommandSchema
+  onCommand?: (value: CommandSchema) => void
+  className?: string,
+  data: CommandSchema
+}
 
 export function CommandCard(props: CommandCardProps) {
-  const { onCommand, onDefault, className } = props
+  const { onCommand, onDefault, className, data } = props
 
-  const [isDefault, setIsDefault] = useState(props.isDefault ?? false)
-  const [localCommand, setLocalCommand] = useState(props.command)
-  const [localDescription, setLocalDescription] = useState(props.description)
+  const [isDefault, setIsDefault] = useState(data.isDefault ?? false)
+  const [localName, setLocalName] = useState(data.name)
+  const [localCommand, setLocalCommand] = useState(data.command)
+  const [localDescription, setLocalDescription] = useState(data.description)
 
   const handleSetDefault = () => {
     setIsDefault(!isDefault)
@@ -27,7 +29,23 @@ export function CommandCard(props: CommandCardProps) {
 
   const handleCommandChange = (value: string) => {
     setLocalCommand(value)
-    onCommand?.(value)
+    updateCommand('command', value)
+  }
+
+  const handleNameChange = (value: string) => {
+    setLocalName(value)
+    updateCommand('name', value)
+  }
+
+  const updateCommand = (key: keyof CommandSchema, value: unknown) => {
+    const _data: CommandSchema = {
+      ...data,
+      name: localName,
+      description: localDescription,
+      command: localCommand,
+      [key]: value
+    }
+    onCommand?.(_data)
   }
 
   return (
@@ -45,14 +63,18 @@ export function CommandCard(props: CommandCardProps) {
         <div className="p-3">
           {/* Author section */}
           <div className="flex items-center justify-between mb-4">
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 flex-1">
               {/* <img src={props?.icon} alt={props?.name} className="w-10 h-10 rounded-full ring-2 ring-white dark:ring-zinc-800" /> */}
               <span className="w-10 h-10 flex justify-center items-center rounded-full ring-2 ring-white dark:ring-zinc-800 border border-solid border-zinc-200 dark:border-zinc-800">
                 <Bot />
               </span>
-              <div>
-                <h4 className="text-sm font-medium text-zinc-900 dark:text-zinc-100">{props?.name}</h4>
-                <p className="text-xs text-zinc-500 dark:text-zinc-400">{props?.createdAt}</p>
+              <div className='flex-1'>
+                <h4 className="text-sm font-medium text-zinc-900 dark:text-zinc-100">
+                  <BlockEditor placeholder='Input command name' value={localName} onChange={handleNameChange} />
+                </h4>
+                <p className="text-xs text-zinc-500 dark:text-zinc-400">
+                  {data?.createdAt}
+                </p>
               </div>
             </div>
             <button type="button" className="p-2 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-full transition-colors">

@@ -5,7 +5,7 @@
  *  @Description All data communication.
  ***************************************************************************/
 use crate::{
-    schema::command::CommandSchema,
+    schema::command::{CommandRequest, CommandSchema},
     service,
     utils::{error::AppError, response::Response},
 };
@@ -36,9 +36,9 @@ pub async fn get_local_commands_data() -> Result<Response<Vec<CommandSchema>>, A
     Ok(result)
 }
 
-#[tauri::command]
+#[tauri::command(rename_all = "snake_case")]
 pub async fn create_local_command(json: String) -> Result<Response<()>, AppError> {
-    let command: CommandSchema = serde_json::from_str(&json).unwrap();
+    let command: CommandRequest = serde_json::from_str(&json).unwrap();
     service::commands::create_command(command).await?;
     let result = Response::success(());
     Ok(result)

@@ -6,12 +6,17 @@
 'use client'
 
 import { AppSidebar } from '@/app/components/layout/app-sidebar'
-import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList } from '@/components/ui/breadcrumb'
 import { Separator } from '@/components/ui/separator'
 import { SidebarInset, SidebarProvider, SidebarTrigger } from '@/app/components/layout/parts/sidebar'
 import type React from 'react'
 
-const SidebarLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+const SidebarLayout: React.FC<{
+    children: React.ReactNode
+    headerChildren?: React.ReactNode
+  }> = ({ 
+    children,
+    headerChildren
+  }) => {
   return (
     <div className="pt-[var(--size-titlebar)] w-full h-full">
       <div className="pt-1 w-full h-full">
@@ -23,13 +28,7 @@ const SidebarLayout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
                 <div className="flex items-center px-2">
                   <SidebarTrigger className="-ml-1" />
                   <Separator orientation="vertical" className="mr-2 h-4" />
-                  <Breadcrumb>
-                    <BreadcrumbList>
-                      <BreadcrumbItem>
-                        <BreadcrumbLink href="#">Manage Your Commands</BreadcrumbLink>
-                      </BreadcrumbItem>
-                    </BreadcrumbList>
-                  </Breadcrumb>
+                  {headerChildren}
                 </div>
               </header>
               <div className="px-2 flex-1 min-h-0">

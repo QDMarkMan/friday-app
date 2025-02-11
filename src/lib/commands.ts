@@ -26,5 +26,9 @@ export const CommandsData = {
   getLocalCommandsData: async () => {
     const response = await invoke('get_local_commands_data')
     return response
+  },
+  createCommand: async (data: unknown) => {
+    const response = await invoke('create_local_command', { json: JSON.stringify(data) })
+    return response
   }
 }

@@ -32,3 +32,16 @@ pub struct CommandSchema {
     #[serde(serialize_with = "serialize_option_datetime_as_timestamp")]
     pub deleted_at: Option<OffsetDateTime>,
 }
+
+#[derive(Debug, Deserialize)]
+pub struct CommandRequest {
+    pub name: String,
+    pub title: String,
+    pub description: Option<String>,
+    pub command: String,
+    pub sort: i32,
+    pub icon: Option<String>,
+    #[serde(default)]
+    pub is_default: bool,
+    pub model_id: Option<i64>,
+}
