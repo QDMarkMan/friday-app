@@ -13,6 +13,7 @@ import { CommandsData } from '@/lib/commands'
 import type { ResponseSchema } from '@/app/schema/response.schema'
 import { format } from 'date-fns'
 import { Button } from '@/components/ui/button'
+import { debounce } from 'radash'
 
 export default function Page() {
   const [cards, setCards] = useState<CommandSchema[]>([])
@@ -21,11 +22,13 @@ export default function Page() {
     console.log(`Card ${id}: ${action}`)
   }
 
-  const handleCommandChange = (command: CommandSchema, newCommand: CommandSchema) => {
+  const handleCommandChange = debounce({
+    delay: 2000,
+  }, (command: CommandSchema, newCommand: CommandSchema) => {
     if (command.id === -1) {
       doCreateCommand(newCommand)
     }
-  }
+  })
 
   const loadCommands = async () => {
     const response = (await CommandsData.getLocalCommandsData()) as ResponseSchema<CommandSchema[]>

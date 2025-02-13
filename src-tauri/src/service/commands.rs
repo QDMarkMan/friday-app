@@ -51,6 +51,7 @@ pub async fn create_command(data: CommandRequest) -> Result<(), sqlx::Error> {
         .get()
         .ok_or_else(|| Error::Configuration("Database pool not initialized".into()))?;
     let uuid = Uuid::new_v4().to_string();
+    let sort = 0; // default sort is 0
 
     let _ = sqlx::query!(
         r#"
@@ -61,7 +62,7 @@ pub async fn create_command(data: CommandRequest) -> Result<(), sqlx::Error> {
         data.name,
         data.description,
         data.command,
-        data.sort,
+        sort,
         data.icon,
         data.is_default,
         data.model_id

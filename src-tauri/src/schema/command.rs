@@ -39,7 +39,7 @@ pub struct CommandRequest {
     pub title: String,
     pub description: Option<String>,
     pub command: String,
-    pub sort: i32,
+    pub sort: Option<i32>,
     pub icon: Option<String>,
     #[serde(default)]
     pub is_default: bool,
