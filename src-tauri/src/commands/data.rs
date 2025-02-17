@@ -37,9 +37,32 @@ pub async fn get_local_commands_data() -> Result<Response<Vec<CommandSchema>>, A
 }
 
 #[tauri::command(rename_all = "snake_case")]
-pub async fn create_local_command(json: String) -> Result<Response<()>, AppError> {
+pub async fn create_local_command(json: String) -> Result<Response<CommandSchema>, AppError> {
     let command: CommandRequest = serde_json::from_str(&json).unwrap();
-    service::commands::create_command(command).await?;
+    let uuid = service::commands::create_local_command(command).await?;
+    let data = service::commands::get_local_command_by_id(&uuid).await?;
+    let result = Response::success(data);
+    Ok(result)
+}
+
+#[tauri::command(rename_all = "snake_case")]
+pub async fn get_local_command(uuid: &str) -> Result<Response<CommandSchema>, AppError> {
+    let data: CommandSchema = service::commands::get_local_command_by_id(uuid).await?;
+    let result = Response::success(data);
+    Ok(result)
+}
+
+#[tauri::command(rename_all = "snake_case")]
+pub async fn update_local_command(uuid: &str, json: String) -> Result<Response<()>, AppError> {
+    let command: CommandRequest = serde_json::from_str(&json).unwrap();
+    service::commands::update_local_command_by_id(uuid, command).await?;
+    let result = Response::success(());
+    Ok(result)
+}
+
+#[tauri::command(rename_all = "snake_case")]
+pub async fn delete_local_command(uuid: &str) -> Result<Response<()>, AppError> {
+    service::commands::delete_local_command_by_id(uuid).await?;
     let result = Response::success(());
     Ok(result)
 }

@@ -4,6 +4,8 @@
  *  @Date [2024-12-11 11:46:23].
  ****************************************************************************/
 
+import type { CommandSchema } from '@/app/schema/command.schema'
+import type { ResponseSchema } from '@/app/schema/response.schema'
 import { invoke } from '@tauri-apps/api/core'
 
 export const getClipboardContent = async (): Promise<string> => {
@@ -27,8 +29,8 @@ export const CommandsData = {
     const response = await invoke('get_local_commands_data')
     return response
   },
-  createCommand: async (data: unknown) => {
-    const response = await invoke('create_local_command', { json: JSON.stringify(data) })
+  createCommand: async (data: unknown): Promise<ResponseSchema<CommandSchema>> => {
+    const response = await invoke('create_local_command', { json: JSON.stringify(data) }) as ResponseSchema<CommandSchema>
     return response
   }
 }

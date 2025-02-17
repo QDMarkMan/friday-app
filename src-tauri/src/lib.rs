@@ -31,7 +31,10 @@ pub fn run() {
             text::get_selection_text,
             agent::get_agent_response,
             data::get_local_commands_data,
-            data::create_local_command
+            data::create_local_command,
+            data::update_local_command,
+            data::get_local_command,
+            data::update_local_command
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

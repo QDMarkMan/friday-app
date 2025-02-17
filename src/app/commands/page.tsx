@@ -57,9 +57,12 @@ export default function Page() {
 
   const doCreateCommand = async (command: CommandDataSchema) => {
     if (!command.name || !command.command) return
-    console.log("🚀 ~ command:", command)
     const response = await CommandsData.createCommand(command)
-    console.log('🚀 ~ doCreateCommand ~ response:', command, response)
+    if (response.code === 1) {
+      const index = cards.findIndex(item => item.id === -1)
+      cards[index] = response.data
+      setCards([...cards])
+    }
   }
 
   useEffect(() => {
