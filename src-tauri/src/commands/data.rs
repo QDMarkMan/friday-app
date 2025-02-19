@@ -54,10 +54,22 @@ pub async fn get_local_command(uuid: &str) -> Result<Response<CommandSchema>, Ap
 
 #[tauri::command(rename_all = "snake_case")]
 pub async fn update_local_command(uuid: &str, json: String) -> Result<Response<()>, AppError> {
-    let command: CommandRequest = serde_json::from_str(&json).unwrap();
-    service::commands::update_local_command_by_id(uuid, command).await?;
-    let result = Response::success(());
-    Ok(result)
+    let command: CommandRequest = match serde_json::from_str(&json) {
+        Ok(data) => data,
+        Err(e) => {
+            return Ok(Response::error(format!(
+                "Failed to parse json data: {}",
+                e.to_string()
+            )));
+        }
+    };
+    match service::commands::update_local_command_by_id(uuid, command).await {
+        Ok(_) => Ok(Response::success(())),
+        Err(e) => Ok(Response::error(format!(
+            "Failed to update command: {}",
+            e.to_string()
+        ))),
+    }
 }
 
 #[tauri::command(rename_all = "snake_case")]

@@ -36,7 +36,6 @@ pub struct CommandSchema {
 #[derive(Debug, Deserialize)]
 pub struct CommandRequest {
     pub name: String,
-    pub title: String,
     pub description: Option<String>,
     pub command: String,
     pub sort: Option<i32>,

@@ -11,6 +11,7 @@ use std::fmt;
 pub enum AppError {
     Database(String),
     Config(String),
+    BadRequest,
     Internal,
 }
 
@@ -22,6 +23,7 @@ impl fmt::Display for AppError {
             AppError::Database(msg) => write!(f, "Database error: {}", msg),
             AppError::Config(msg) => write!(f, "Configuration error: {}", msg),
             AppError::Internal => write!(f, "Internal server error"),
+            AppError::BadRequest => write!(f, "Bad request"),
         }
     }
 }

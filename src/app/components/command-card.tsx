@@ -11,11 +11,13 @@ type CommandCardProps = {
   onDefault?: () => void
   onCommand?: (value: CommandSchema) => void
   className?: string,
-  data: CommandSchema
+  data: CommandSchema,
+  children?: React.ReactNode
+  bottomChildren?: React.ReactNode
 }
 
 export function CommandCard(props: CommandCardProps) {
-  const { onCommand, onDefault, className, data } = props
+  const { onCommand, onDefault, className, data, bottomChildren, children } = props
 
   const [isDefault, setIsDefault] = useState(data.isDefault ?? false)
   const [localName, setLocalName] = useState(data.name)
@@ -134,6 +136,7 @@ export function CommandCard(props: CommandCardProps) {
                 <Share2 className="w-5 h-5" />
                 <span>{engagement?.shares}</span>
               </button> */}
+              { bottomChildren }
             </div>
             <button
               type="button"
@@ -148,6 +151,7 @@ export function CommandCard(props: CommandCardProps) {
           </div>
         </div>
       </div>
+      { children }
     </div>
   )
 }
