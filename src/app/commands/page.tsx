@@ -21,7 +21,7 @@ enum StatusEnum {
   UPDATING = 'Updating',
   SAVING = 'Saving',
   SAVED = 'Saved',
-  EDITING = 'Editing'
+  CHANGED = 'Changed'
 }
 
 type StateModel = {
@@ -29,13 +29,15 @@ type StateModel = {
   message?: string
 }
 
+const DisplayState = new Set([StatusEnum.ERROR, StatusEnum.UPDATING, StatusEnum.CHANGED, StatusEnum.SAVING])
+
 const StateBar = ({ state, message }: StateModel) => {
   const StateIcon = {
     [StatusEnum.ERROR]: XCircle,
     [StatusEnum.UPDATING]: Loader,
     [StatusEnum.SAVING]: Loader,
     [StatusEnum.SAVED]: CheckCheck,
-    [StatusEnum.EDITING]: Edit
+    [StatusEnum.CHANGED]: Edit
   }[state]
 
   const stateColors = {
@@ -43,11 +45,11 @@ const StateBar = ({ state, message }: StateModel) => {
     [StatusEnum.UPDATING]: 'text-blue-600',
     [StatusEnum.SAVING]: 'text-yellow-600',
     [StatusEnum.SAVED]: 'text-green-600',
-    [StatusEnum.EDITING]: 'text-gray-600'
+    [StatusEnum.CHANGED]: 'text-gray-600'
   }
 
   return (
-    <div className={`flex items-center py-1 ${stateColors[state]}`}>
+    <div className={`flex items-center py-1 ${stateColors[state]} transition-all duration-300 ease-in-out opacity-100`}>
       <StateIcon className="w-4 h-4" />
       <span className="ml-2 text-xs font-medium">
         {state}
@@ -66,15 +68,16 @@ export default function Page() {
   }
 
   const handleCommandChange = debounce({
-    delay: 2000,
-  }, (command: CommandSchema, newCommand: CommandSchema) => {
+    delay: 2000
+  }, async (command: CommandSchema, newCommand: CommandSchema) => {
     if (!command.name || !command.command) return
+    
     if (command.id === -1) {
       doUpdateCommandState(command.id, StatusEnum.SAVING)
-      doCreateCommand(newCommand)
+      await doCreateCommand(newCommand)
     } else {
       doUpdateCommandState(command.id, StatusEnum.UPDATING)
-      doUpdateCommand(newCommand)
+      await doUpdateCommand(newCommand)
     }
   })
 
@@ -116,6 +119,7 @@ export default function Page() {
   }
 
   const doUpdateCommand = async (command: CommandSchema) => {
+    console.log("🚀 ~ doUpdateCommand ~ command:", command.command)
     setCardStates(prev => ({ ...prev, [command.id]: StatusEnum.UPDATING }))
     try {
       const response = await CommandsData.updateCommand(command)
@@ -143,10 +147,13 @@ export default function Page() {
           data={card}
           onDefault={() => handleAction(card.id, 'bookmarked')}
           onCommand={(command: CommandSchema) => {
-            setCardStates(prev => ({ ...prev, [card.id]: StatusEnum.EDITING }))
             handleCommandChange(card, command)
           }}
-          bottomChildren={cardStates[card.id] && <StateBar state={cardStates[card.id]} />}
+          bottomChildren={DisplayState.has(cardStates[card.id]) ? (
+            <div className="transition-opacity duration-300 ease-in-out">
+              <StateBar state={cardStates[card.id]} />
+            </div>
+          ) : null}
         >
         </CommandCard>
       ))}
