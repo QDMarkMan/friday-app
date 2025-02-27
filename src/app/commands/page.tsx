@@ -68,10 +68,9 @@ export default function Page() {
   }
 
   const handleCommandChange = debounce({
-    delay: 2000
+    delay: 3000
   }, async (command: CommandSchema, newCommand: CommandSchema) => {
-    if (!command.name || !command.command) return
-    
+    if (!newCommand.name || !newCommand.command) return
     if (command.id === -1) {
       doUpdateCommandState(command.id, StatusEnum.SAVING)
       await doCreateCommand(newCommand)
@@ -119,7 +118,6 @@ export default function Page() {
   }
 
   const doUpdateCommand = async (command: CommandSchema) => {
-    console.log("🚀 ~ doUpdateCommand ~ command:", command.command)
     setCardStates(prev => ({ ...prev, [command.id]: StatusEnum.UPDATING }))
     try {
       const response = await CommandsData.updateCommand(command)
@@ -134,6 +132,30 @@ export default function Page() {
     setCardStates(prev => ({ ...prev, [id]: state }))
   }
 
+  const handleDeleteCommand = async (uuid: string) => {
+    if (!uuid) {
+      setCards(cards.filter(card => card.id !== uuid));
+      return;
+    }
+    try {
+      const response = await CommandsData.deleteCommand(uuid);
+      if (response.code === 1) {
+        // Remove from UI on successful deletion
+        setCards(cards.filter(card => card.uuid !== uuid));
+        // Clean up the card state
+        setCardStates(prev => {
+          const newStates = { ...prev };
+          delete newStates[uuid];
+          return newStates;
+        });
+      } else {
+        doUpdateCommandState(uuid, StatusEnum.ERROR);
+      }
+    } catch (error) {
+      doUpdateCommandState(uuid, StatusEnum.ERROR);
+    }
+  };
+
   useEffect(() => {
     loadCommands()
   }, [])
@@ -146,10 +168,9 @@ export default function Page() {
           className="mb-3"
           data={card}
           onDefault={() => handleAction(card.id, 'bookmarked')}
-          onCommand={(command: CommandSchema) => {
-            handleCommandChange(card, command)
-          }}
-          bottomChildren={DisplayState.has(cardStates[card.id]) ? (
+          onDelete={() => handleDeleteCommand(card.uuid)}
+          onCommand={(command: CommandSchema) => handleCommandChange(card, command)}
+          topChildren={DisplayState.has(cardStates[card.id]) ? (
             <div className="transition-opacity duration-300 ease-in-out">
               <StateBar state={cardStates[card.id]} />
             </div>

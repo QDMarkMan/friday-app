@@ -34,7 +34,8 @@ pub fn run() {
             data::create_local_command,
             data::update_local_command,
             data::get_local_command,
-            data::update_local_command
+            data::update_local_command,
+            data::delete_local_command
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

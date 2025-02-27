@@ -2,7 +2,7 @@
 'use client'
 
 import { cn } from '@/lib/utils'
-import { Bot, Bookmark, MoreHorizontal, Link as LinkIcon } from 'lucide-react'
+import { Bot, Bookmark, MoreHorizontal, Link as LinkIcon, Trash2, Heart } from 'lucide-react'
 import { useState } from 'react'
 import type { CommandSchema } from '../schema/command.schema'
 import BlockEditor from './block-editor'
@@ -10,14 +10,16 @@ import BlockEditor from './block-editor'
 type CommandCardProps = {
   onDefault?: () => void
   onCommand?: (value: CommandSchema) => void
+  onDelete?: () => void
   className?: string,
   data: CommandSchema,
   children?: React.ReactNode
   bottomChildren?: React.ReactNode
+  topChildren?: React.ReactNode
 }
 
 export function CommandCard(props: CommandCardProps) {
-  const { onCommand, onDefault, className, data, bottomChildren, children } = props
+  const { onCommand, onDefault, onDelete, className, data, bottomChildren, children, topChildren } = props
 
   const [isDefault, setIsDefault] = useState(data.isDefault ?? false)
   const [localName, setLocalName] = useState(data.name)
@@ -79,9 +81,9 @@ export function CommandCard(props: CommandCardProps) {
                 </p>
               </div>
             </div>
-            <button type="button" className="p-2 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-full transition-colors">
-              <MoreHorizontal className="w-5 h-5 text-zinc-400" />
-            </button>
+            <div className="flex items-center">
+              { topChildren }
+            </div>
           </div>
           {/* Description section */}
           {/* <div className="text-zinc-600 dark:text-zinc-300 mb-4">
@@ -109,40 +111,23 @@ export function CommandCard(props: CommandCardProps) {
           {/* Engagement section */}
           <div className="flex items-center justify-between pt-2">
             <div className="flex items-center gap-6">
-              {/* <button
-                type="button"
-                onClick={handleLike}
-                className={cn(
-                  'flex items-center gap-2 text-sm transition-colors',
-                  isLiked ? 'text-rose-600' : 'text-zinc-500 dark:text-zinc-400 hover:text-rose-600'
-                )}
-              >
-                <Heart className={cn('w-5 h-5 transition-all', isLiked && 'fill-current scale-110')} />
-                <span>{likes}</span>
-              </button>
-              <button
-                type="button"
-                onClick={onComment}
-                className="flex items-center gap-2 text-sm text-zinc-500 dark:text-zinc-400 hover:text-blue-500 transition-colors"
-              >
-                <MessageCircle className="w-5 h-5" />
-                <span>{engagement?.comments}</span>
-              </button>
-              <button
-                type="button"
-                onClick={onShare}
-                className="flex items-center gap-2 text-sm text-zinc-500 dark:text-zinc-400 hover:text-green-500 transition-colors"
-              >
-                <Share2 className="w-5 h-5" />
-                <span>{engagement?.shares}</span>
-              </button> */}
+              {onDelete && (
+                <button 
+                  type="button" 
+                  onClick={onDelete}
+                  className="p-1 hover:bg-red-100 dark:hover:bg-red-900/20 hover:text-red-600 rounded-full transition-colors mr-1"
+                  aria-label="Delete command"
+                >
+                  <Trash2 className="w-4 h-4" />
+                </button>
+              )}
               { bottomChildren }
             </div>
             <button
               type="button"
               onClick={handleSetDefault}
               className={cn(
-                'p-2 rounded-full transition-all',
+                'p-1 rounded-full transition-all',
                 isDefault ? 'text-yellow-500 bg-yellow-50 dark:bg-yellow-500/10' : 'text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800'
               )}
             >

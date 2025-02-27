@@ -36,5 +36,9 @@ export const CommandsData = {
   updateCommand: async (data: CommandSchema): Promise<ResponseSchema<CommandSchema>> => {
     const response = await invoke('update_local_command', { uuid: data.uuid,  json: JSON.stringify(data) }) as ResponseSchema<CommandSchema>
     return response
+  },
+  deleteCommand: async (uuid: string): Promise<ResponseSchema<CommandSchema>> => {
+    const response = await invoke('delete_local_command', { uuid }) as ResponseSchema<CommandSchema>
+    return response
   }
 }
